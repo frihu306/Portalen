@@ -1,0 +1,97 @@
+/*
+* Trappans Personalportal
+* Utvecklad av Trappans webblag 2014:
+* Hampus Axelsson, Linus Sjölinder, Connie Åberg, Andreas Antonsson
+*/
+
+/*
+	Table of content:
+	1.	Sidebar
+
+	
+*/
+
+/* =Reset
+-------------------------------------------------------------- */
+
+/* =Sidebar
+-------------------------------------------------------------- */
+
+	#sidebar {
+		background: #363430;
+	} 
+	#sidebar a.logo {
+		display: block;
+		overflow: hidden;
+		padding: 40px;
+		background: #f99929;
+	} 
+	#sidebar a.logo img {
+		width: 160px;
+		height: 60px;
+	}
+	#sidebar .user-info {
+		padding: 20px;
+		height: 80px;
+		background: #ec8712;
+	}
+	#sidebar .user-info img {
+		float: left;
+		margin-right: 10px;
+		border-radius: 30px;
+	}
+	#sidebar .user-info p, #sidebar .user-info a {
+		margin-top: -1px;
+		color: #eee;
+	}
+	
+	#content {
+		padding: 30px;
+	}
+	
+/* =Sidebar Navigation
+-------------------------------------------------------------- */
+		
+	#sidebar ul.main-nav {
+		margin: 0;
+		padding: 10px 0;
+	}
+	#sidebar .navbar-collapse {
+		padding: 0;
+		margin: 0;
+	}
+
+	#sidebar ul.main-nav li a {
+		display: block;
+		padding: 10px 20px;
+		color: #aaa;
+	}
+	#sidebar ul.main-nav li a:hover {
+		color: #68ccf5;
+		text-decoration: none;
+	}
+	#sidebar ul.main-nav li.active a {
+		color: #f8f8f8;
+	}
+	#sidebar ul.main-nav li a span {
+		float: left;
+		margin-right: 20px;
+		padding-top: 2px;
+	}
+	
+	
+	
+	
+	
+	.thin-100 {
+		font-weight: 100;
+		letter-spacing: 2px;
+	}
+	.thin-200 {
+		font-weight: 200;
+		letter-spacing: 1px;
+	}
+	.thin-300 {
+		font-weight: 400;
+		letter-spacing: 0px;
+	}

@@ -1,0 +1,26 @@
+html {min-height: 100%; position: relative;}
+body {height: 100%; }
+
+
+@media (max-width: 991px) {
+	#sidebar {
+		position: static;
+		width: 100%;
+	}
+}
+
+@media (min-width: 992px) {
+	#content {
+		margin-left: 240px;
+	}
+	
+	#sidebar {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 240px;
+		overflow: hidden;
+	} 
+
+}
