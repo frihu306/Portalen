@@ -6686,7 +6686,7 @@ td.visible-sm {
   }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: fpx) and (max-width: 991px) {
   .visible-sm {
     display: block !important;
   }
