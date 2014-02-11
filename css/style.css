@@ -11,6 +11,7 @@
 	
 */
 
+
 /* =Reset
 -------------------------------------------------------------- */
 
@@ -73,7 +74,7 @@
 		color: #aaa;
 	}
 	#sidebar ul.main-nav li a:hover {
-		color: #68ccf5;
+		color: #f99929;
 		text-decoration: none;
 	}
 	#sidebar ul.main-nav li.active a {
@@ -85,10 +86,38 @@
 		padding-top: 2px;
 	}
 	
-	
+/* =Content
+-------------------------------------------------------------- */
 	
 	#content {
-		padding: 30px;
+		padding: 10px 30px 30px 30px;
+	}
+	
+	#content .top-div {
+		margin: 10px 0 50px 0;
+		border-bottom: 1px solid #ddd;
+	}
+	
+	#content .user-info {
+		float: right;
+	}
+	#content .user-info img,
+	#content .user-info a {
+		float: left;
+		color: #333;
+	}
+	#content .user-info img {
+		border-radius: 22px;
+	}
+	#content .user-info a.username {
+		font-weight: bold;
+		margin: 6px 5px 0 10px;
+		padding-right: 20px;
+		border-right: 1px solid #ccc;
+	}
+	#content .user-info a.sign-out {
+		font-size: 16px;
+		margin: 7px 15px 0 15px;
 	}
 	
 	
