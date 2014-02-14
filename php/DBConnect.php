@@ -1,24 +1,20 @@
 <?php
 
-class connect
+class DBConnect
 {
 
-	private $connection;
+	public static $mysql;
 
-	public static function connectDB()
+	public static function open()
 	{
-		$connection = mysqli_connect("localhost","root","","portalen");
-		if(mysqli_connect_errno())
-		{
-			echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		}
-		echo "yea";
+		self::$mysql = mysql_connect("localhost","root","") or die("Unable to connect to MySQL");
+		mysql_select_db("portalen");
 	}
 	
-	public static function disconnectDB()
+	public static function close()
 	{
-		mysqli_close($connection);
+		mysql_close(self::$mysql);
 	}
 
-  
+} 
 ?> 
