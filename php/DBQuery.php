@@ -31,9 +31,9 @@ class DBQuery
 		return $rows;
 	}
 	
-	public static function getRow($from, $id)
+	public static function getRow($from, $where, $value)
 	{
-		$sql = "SELECT * FROM $from WHERE id = '$id'";
+		$sql = "SELECT * FROM $from WHERE $where = '$value'";
 		DBConnect::open();
 		$result = mysql_query($sql);
 		DBConnect::close();
