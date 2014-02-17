@@ -24,13 +24,8 @@
 	#sidebar a.logo {
 		display: block;
 		overflow: hidden;
-		padding: 40px;
 		background: #f99929;
 	} 
-	#sidebar a.logo img {
-		width: 160px;
-		height: 100px;
-	}
 	#sidebar .your-period {
 		padding: 20px;
 		background: #ec8712;
@@ -121,14 +116,14 @@
 	}
 	#content .upcoming-event {
 		padding: 15px;
-		background: #5BB0ED;
+		background: #f99929;
 		color: #fff;
 	}
 
 	#content .upcoming-event-info {
 		background: #fff;
-		border-bottom: 2px solid #ddd;
-		border-right: 2px solid #ddd;
-		border-left: 2px solid #ddd;
+		border-bottom: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		border-left: 1px solid #ddd;
 		padding: 15px 15px 5px 15px;
 	}

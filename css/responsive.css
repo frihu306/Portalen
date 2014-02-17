@@ -7,7 +7,23 @@ body {height: 100%; }
 		position: static;
 		width: 100%;
 	}
+	#sidebar a.logo {
+		float: left;
+		padding: 15px;
+		height: 64px;
+		border-bottom: 15px solid #f99929;
+	} 
+	#sidebar a.logo img {
+		width: 80px;
+		height: 50px;
+	}
+	#sidebar .your-period {
+		display: none;
+	}
 }
+
+
+
 
 @media (min-width: 992px) {
 	#content {
@@ -22,5 +38,12 @@ body {height: 100%; }
 		width: 240px;
 		overflow: hidden;
 	} 
+	#sidebar a.logo {
+		padding: 40px;
+	} 
+	#sidebar a.logo img {
+		width: 160px;
+		height: 100px;
+	}
 
 }
