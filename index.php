@@ -1,10 +1,26 @@
- <?php
+<?php
 	session_start();
 	if(!isset($_SESSION['user_id']))
 	{
-		header('Location: login.php'); 
+		header('Location: login.php');
 	}
-?> 
+	
+	include_once('php/DBQuery.php');
+	
+	//Score progress bar calculation
+	$score = DBQuery::getRow('score', 'user_id', $_SESSION['user_id']);
+	
+	$workedPoints = $score['worked'];
+	$bookedPoints = $score['booked'];
+	
+	$workedPointsPercent = $workedPoints / 8 * 100;
+	$bookedPointsPercent = $bookedPoints / 8 * 100;
+	if($bookedPointsPercent > 100 - $workedPointsPercent)
+	{
+		$bookedPointsPercent = 100 - $workedPointsPercent;
+	}
+	
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -35,11 +51,11 @@
  					  </p>
 					  
 					  <div class="progress">
-					    <div class="progress-bar worked" style="width: 37.5%">
+					    <div class="progress-bar worked" style="width: <?php echo $workedPointsPercent ?>%">
 						<!--<p> 3p </p>
 					      <span class="sr-only">3 arbetade poäng</span>-->
 					    </div>
-					    <div class="progress-bar booked" style="width: 25%">
+					    <div class="progress-bar booked" style="width: <?php echo $bookedPointsPercent ?>%">
 						<!--<p> 3p </p>
 					      <span class="sr-only">3 bokade poäng</span> -->
 					    </div>
