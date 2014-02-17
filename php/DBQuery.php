@@ -4,7 +4,7 @@ include_once('DBConnect.php');
 
 class DBQuery
 {	
-	public static function get($select, $from, $where, $value)
+	public static function getFirst($select, $from, $where, $value)
 	{
 		$sql = "SELECT $select FROM $from WHERE $where = '$value'";
 		DBConnect::open();
@@ -14,7 +14,7 @@ class DBQuery
 		return $row[$select];
 	}
 	
-	public static function getSeveral($select, $from, $where = 0, $value = 0)
+	public static function get($select, $from, $where = 0, $value = 0)
 	{
 		if($where == 0)
 			$sql = "SELECT $select FROM $from";
