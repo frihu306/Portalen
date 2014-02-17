@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['user_id']))
+	{
+		header('Location: login.php');
+	}
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -91,9 +98,15 @@
 				  <div class="col-sm-12">
 					  <span class="glyphicon glyphicon-search"></span>
 					  <div class="user-info">
+<<<<<<< HEAD:index.html
 						  <img src="img/profile.jpg" width="32px" height="32px">
 						  <a href="http://google.se" class="username"><span style="font-weight: normal">Inloggad som</span> Andreas Antonsson</a>
 					  	<a href="/" class="sign-out"><span class="glyphicon glyphicon-off"></span></a>
+=======
+						  <img src="profile.jpg" width="32px" height="32px">
+						  <a href="http://google.se" class="username"><span style="font-weight: normal">Inloggad som</span> <?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></a>
+					  	<a href="login.php" class="sign-out"><span class="glyphicon glyphicon-off"></span></a>
+>>>>>>> f32324496fc9788105038139da105f16e358a7ba:index.php
 					  </div>
 				  </div>
 		 	 </div> 
