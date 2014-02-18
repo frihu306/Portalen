@@ -53,10 +53,63 @@ include_once('php/DBQuery.php');
 	{
 		for($i = 0; $i < count($events); ++$i)
 		{
+		
+		$name = $events[$i]['name'];
+		$date = new DateTime($events[$i]['start_time']);
+		$day = $date->format('d');
+		$month = $date->format('m');
+		$start = $date->format('H:i');
+		$end = new DateTime($events[$i]['end_time']);
+		$end = $end->format('H:i');
+		switch($month)
+		{
+		case '01':
+			$month = 'januari';
+			break;
+		case '02':
+			$month = 'februari';
+			break;
+		case '03':
+			$month = 'mars';
+			break;
+		case '04':
+			$month = 'april';
+			break;
+		case '05':
+			$month = 'maj';
+			break;
+		case '06':
+			$month = 'juni';
+			break;
+		case '07':
+			$month = 'juli';
+			break;
+		case '08':
+			$month = 'augusti';
+			break;
+		case '09':
+			$month = 'september';
+			break;
+		case '10':
+			$month = 'oktober';
+			break;
+		case '11':
+			$month = 'november';
+			break;
+		case '12':
+			$month = 'december';
+			break;
+		default:
+			break;
+		}
+		if(substr($day,0,1) == '0')
+		{
+			$day = substr($day,1,1);
+		}
 			?>
 			<div class="col-sm-4">
 					 <div class="upcoming-event">
-						 <strong><?php echo $events[$i]['name']; ?></strong><br /> 20:e februari 17.00-18.00
+						 <strong><?php echo $name; ?></strong><br /> <?php echo $day ?>:e <?php echo $month ?> <?php echo $start.'-'.$end; ?>
 					 </div>
 					 <div class="upcoming-event-info" style="overflow: hidden;">
 						 <small><p style="float: left;">Lediga pass <br /><strong>2/16</strong></p>
