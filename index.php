@@ -13,9 +13,8 @@
 	$date = date('Y-m-d');
 
 	$workedPointsResult = DBQuery::sql("SELECT points FROM points_worked WHERE event_id IN
-						(SELECT id FROM event WHERE start_time BETWEEN 
-							(SELECT start_date FROM period WHERE start_date <= '$date' AND end_date >= '$date') AND 
-							(SELECT end_date FROM period WHERE start_date <= '$date' AND end_date >= '$date')
+						(SELECT id FROM event WHERE period_id IN 
+							(SELECT id FROM period WHERE start_date <= '$date' AND end_date >= '$date')
 						) AND
 						user_id IN
 						(SELECT id FROM user WHERE id = '$_SESSION[user_id]')
@@ -24,9 +23,8 @@
 	$workedPoints = 0;
 	
 	$bookedPointsResult = DBQuery::sql("SELECT points FROM points_booked WHERE event_id IN
-						(SELECT id FROM event WHERE start_time BETWEEN 
-							(SELECT start_date FROM period WHERE start_date <= '$date' AND end_date >= '$date') AND 
-							(SELECT end_date FROM period WHERE start_date <= '$date' AND end_date >= '$date')
+						(SELECT id FROM event WHERE period_id IN 
+							(SELECT id FROM period WHERE start_date <= '$date' AND end_date >= '$date')
 						) AND
 						user_id IN
 						(SELECT id FROM user WHERE id = '$_SESSION[user_id]')
