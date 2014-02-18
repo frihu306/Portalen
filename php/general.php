@@ -57,67 +57,63 @@ include_once('php/DBQuery.php');
 	{
 		for($i = 0; $i < count($events); ++$i)
 		{
-		$eventId = $events[$i]['id'];
-		$workSlots = DBQuery::sql("SELECT * FROM work_slot WHERE event_id = '$eventId'");
-		$availableSlots = DBQuery::sql	("SELECT * FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
-											(SELECT work_slot_id FROM user_work)
-										");
-		$workSlotsCount = count($workSlots);
-		$availableSlotsCount = count($availableSlots);
-		
-		$name = $events[$i]['name'];
-		$date = new DateTime($events[$i]['start_time']);
-		$day = $date->format('d');
-		$month = $date->format('m');
-		$start = $date->format('H:i');
-		$end = new DateTime($events[$i]['end_time']);
-		$end = $end->format('H:i');
-		$type = $types[$i]['name'];
-		switch($month)
-		{
-		case '01':
-			$month = 'januari';
-			break;
-		case '02':
-			$month = 'februari';
-			break;
-		case '03':
-			$month = 'mars';
-			break;
-		case '04':
-			$month = 'april';
-			break;
-		case '05':
-			$month = 'maj';
-			break;
-		case '06':
-			$month = 'juni';
-			break;
-		case '07':
-			$month = 'juli';
-			break;
-		case '08':
-			$month = 'augusti';
-			break;
-		case '09':
-			$month = 'september';
-			break;
-		case '10':
-			$month = 'oktober';
-			break;
-		case '11':
-			$month = 'november';
-			break;
-		case '12':
-			$month = 'december';
-			break;
-		default:
-			break;
-		}
-		if(substr($day,0,1) == '0')
-		{
-			$day = substr($day,1,1);
-		}
+			$eventId = $events[$i]['id'];
+			$workSlots = DBQuery::sql("SELECT * FROM work_slot WHERE event_id = '$eventId'");
+			$availableSlots = DBQuery::sql	("SELECT * FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
+												(SELECT work_slot_id FROM user_work)
+											");
+			$workSlotsCount = count($workSlots);
+			$availableSlotsCount = count($availableSlots);
+			
+			$name = $events[$i]['name'];
+			$date = new DateTime($events[$i]['start_time']);
+			$day = $date->format('j');
+			$month = $date->format('m');
+			$start = $date->format('H:i');
+			$end = new DateTime($events[$i]['end_time']);
+			$end = $end->format('H:i');
+			$type = $types[$i]['name'];
+			switch($month)
+			{
+			case '01':
+				$month = 'januari';
+				break;
+			case '02':
+				$month = 'februari';
+				break;
+			case '03':
+				$month = 'mars';
+				break;
+			case '04':
+				$month = 'april';
+				break;
+			case '05':
+				$month = 'maj';
+				break;
+			case '06':
+				$month = 'juni';
+				break;
+			case '07':
+				$month = 'juli';
+				break;
+			case '08':
+				$month = 'augusti';
+				break;
+			case '09':
+				$month = 'september';
+				break;
+			case '10':
+				$month = 'oktober';
+				break;
+			case '11':
+				$month = 'november';
+				break;
+			case '12':
+				$month = 'december';
+				break;
+			default:
+				break;
+			}
 			?>
 			<div class="col-sm-4">
 					 <div class="upcoming-event">
@@ -131,4 +127,19 @@ include_once('php/DBQuery.php');
 			<?php
 		}
 	}
+	//
+	//Load current period
+	$periodDates = DBquery::sql("SELECT start_date, end_date FROM period WHERE start_date <= '$date' AND end_date >= '$date'");
+	$periodStart = "";
+	$periodEnd = "";
+	if(count($periodDates) == 1)
+	{
+		$periodStart = new DateTime($periodDates[0]['start_date']);
+		$periodStart = strtolower($periodStart->format('j M'));
+		$periodEnd = new DateTime($periodDates[0]['end_date']);
+		$periodEnd = strtolower($periodEnd->format('j M'));
+		$periodStart = str_replace('y', 'j', $periodStart);
+		$periodStart = str_replace('c', 'k', $periodStart);
+	}
+	
 ?>

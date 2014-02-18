@@ -33,7 +33,7 @@
 			 
 			  <div class="your-period">
  					 <p>
- 					  <small>Din period: <strong>1 feb - 28 feb</strong></small>
+ 					  <small>Din period: <strong><?php echo $periodStart.' - '.$periodEnd; ?></strong></small>
  					  </p>
 					  
 					  <div class="progress">

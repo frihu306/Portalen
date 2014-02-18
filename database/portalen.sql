@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 18, 2014 at 09:29 PM
--- Server version: 5.6.12-log
--- PHP Version: 5.4.12
+-- Generation Time: Feb 18, 2014 at 10:52 PM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.4.3
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `portalen`
 --
-CREATE DATABASE IF NOT EXISTS `portalen` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `portalen`;
 
 -- --------------------------------------------------------
 
@@ -38,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   PRIMARY KEY (`id`),
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `event`
@@ -47,7 +45,8 @@ CREATE TABLE IF NOT EXISTS `event` (
 INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`, `event_type_id`) VALUES
 (1, 'Pizzaonsdag', '2014-02-19 18:00:00', '2014-02-19 22:00:00', 1, 1),
 (2, 'Vårkravallen', '2014-03-08 22:00:00', '2014-03-09 03:00:00', 2, 2),
-(4, 'Sittning', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1, 3);
+(4, 'Sittning', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1, 3),
+(5, 'Personalfest', '2014-03-09 18:30:00', '2014-03-10 03:00:00', 2, 4);
 
 -- --------------------------------------------------------
 
@@ -59,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `event_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `event_type`
@@ -68,7 +67,8 @@ CREATE TABLE IF NOT EXISTS `event_type` (
 INSERT INTO `event_type` (`id`, `name`) VALUES
 (1, 'Pub'),
 (2, 'Nattklubb'),
-(3, 'Sittning');
+(3, 'Sittning'),
+(4, 'Personalaktivitet');
 
 -- --------------------------------------------------------
 
