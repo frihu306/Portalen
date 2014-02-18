@@ -111,7 +111,7 @@
 				 <div class="col-sm-12">
 				 	<h4 style="font-weight: 200;">Kommande pass</h4>
 					<?php
-						loadUpcomingEvents($upcomingEvents);
+						loadUpcomingEvents($upcomingEvents, $eventTypes);
 					?>
 			 	 </div>
    		 	 </div>

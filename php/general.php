@@ -47,12 +47,23 @@ include_once('php/DBQuery.php');
 	}
 	//
 	//Load upcoming events
-	$upcomingEvents = DBQuery::sql("SELECT * FROM event WHERE start_time >= '$date'ORDER BY start_time LIMIT 3");
+	$upcomingEvents = DBQuery::sql("SELECT * FROM event WHERE start_time >= '$date' ORDER BY start_time LIMIT 3");
+	$eventTypes = DBQuery::sql	("SELECT name FROM event_type WHERE id IN 
+									(SELECT event_type_id FROM event WHERE start_time >= '$date' ORDER BY start_time)
+								LIMIT 3");
+								
 	
-	function loadUpcomingEvents($events)
+	function loadUpcomingEvents($events, $types)
 	{
 		for($i = 0; $i < count($events); ++$i)
 		{
+		$eventId = $events[$i]['id'];
+		$workSlots = DBQuery::sql("SELECT * FROM work_slot WHERE event_id = '$eventId'");
+		$availableSlots = DBQuery::sql	("SELECT * FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
+											(SELECT work_slot_id FROM user_work)
+										");
+		$workSlotsCount = count($workSlots);
+		$availableSlotsCount = count($availableSlots);
 		
 		$name = $events[$i]['name'];
 		$date = new DateTime($events[$i]['start_time']);
@@ -61,6 +72,7 @@ include_once('php/DBQuery.php');
 		$start = $date->format('H:i');
 		$end = new DateTime($events[$i]['end_time']);
 		$end = $end->format('H:i');
+		$type = $types[$i]['name'];
 		switch($month)
 		{
 		case '01':
@@ -112,8 +124,8 @@ include_once('php/DBQuery.php');
 						 <strong><?php echo $name; ?></strong><br /> <?php echo $day ?>:e <?php echo $month ?> <?php echo $start.'-'.$end; ?>
 					 </div>
 					 <div class="upcoming-event-info" style="overflow: hidden;">
-						 <small><p style="float: left;">Lediga pass <br /><strong>2/16</strong></p>
-						 <p style="float: right">Arrangemangstyp <br /><strong>Personalaktivitet</strong></p></small>
+						 <small><p style="float: left;">Lediga pass <br /><strong><?php echo $availableSlotsCount; ?>/<?php echo $workSlotsCount; ?></strong></p>
+						 <p style="float: right">Arrangemangstyp <br /><strong><?php echo $type ?></strong></p></small>
 					 </div>
 				 </div>
 			<?php
