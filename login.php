@@ -103,15 +103,15 @@ if(isset($_POST['log_in']))
       <div class="row">
         <div class="login-form">
           <h2>Login</h2>
-          <form action="">
+          <form action="" method="post">
             <fieldset>
               <div class="clearfix">
-                <input type="text" placeholder="Username" >
+                <input type="text" placeholder="Username" name="user_name" >
               </div>
               <div class="clearfix">
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" name="password">
               </div>
-              <button class="btn primary" type="submit" name="sign_in">Sign in</button>
+              <button class="btn primary" type="submit" name="log_in">Sign in</button>
             </fieldset>
           </form>
         </div>
