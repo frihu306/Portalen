@@ -7,14 +7,49 @@
 	
 	include_once('php/DBQuery.php');
 	
-	//Score progress bar calculation
-	$score = DBQuery::getRow('score', 'user_id', $_SESSION['user_id']);
 	
-	$workedPoints = $score['worked'];
-	$bookedPoints = $score['booked'];
+	
+	//Score progress bar calculation
+	$date = date('Y-m-d');
+
+	$workedPointsResult = DBQuery::sql("SELECT points FROM points_worked WHERE event_id IN
+						(SELECT id FROM event WHERE start_time BETWEEN 
+							(SELECT start_date FROM period WHERE start_date <= '$date' AND end_date >= '$date') AND 
+							(SELECT end_date FROM period WHERE start_date <= '$date' AND end_date >= '$date')
+						) AND
+						user_id IN
+						(SELECT id FROM user WHERE id = '$_SESSION[user_id]')
+					");
+					
+	$workedPoints = 0;
+	
+	$bookedPointsResult = DBQuery::sql("SELECT points FROM points_booked WHERE event_id IN
+						(SELECT id FROM event WHERE start_time BETWEEN 
+							(SELECT start_date FROM period WHERE start_date <= '$date' AND end_date >= '$date') AND 
+							(SELECT end_date FROM period WHERE start_date <= '$date' AND end_date >= '$date')
+						) AND
+						user_id IN
+						(SELECT id FROM user WHERE id = '$_SESSION[user_id]')
+					");
+					
+	$bookedPoints = 0;
+					
+	for($i = 0; $i < count($workedPointsResult); ++$i)
+	{
+		$workedPoints = $workedPoints + $workedPointsResult[$i]['points'];
+	}
+	
+	for($i = 0; $i < count($bookedPointsResult); ++$i)
+	{
+		$bookedPoints = $bookedPoints + $bookedPointsResult[$i]['points'];
+	}
 	
 	$workedPointsPercent = $workedPoints / 8 * 100;
 	$bookedPointsPercent = $bookedPoints / 8 * 100;
+	if($workedPointsPercent > 100)
+	{
+		$workedPointsPercent = 100;
+	}
 	if($bookedPointsPercent > 100 - $workedPointsPercent)
 	{
 		$bookedPointsPercent = 100 - $workedPointsPercent;

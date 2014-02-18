@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 17, 2014 at 08:21 PM
+-- Generation Time: Feb 18, 2014 at 12:48 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -23,23 +23,95 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `score`
+-- Table structure for table `event`
 --
 
-CREATE TABLE IF NOT EXISTS `score` (
+CREATE TABLE IF NOT EXISTS `event` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`) VALUES
+(1, 'Pizzaonsdag', '2014-02-19 18:00:00', '2014-02-19 22:00:00'),
+(2, 'Vårkravallen', '2014-03-08 22:00:00', '2014-03-09 03:00:00'),
+(3, 'Sittning', '2014-02-15 15:00:00', '2014-02-15 16:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `period`
+--
+
+CREATE TABLE IF NOT EXISTS `period` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `period`
+--
+
+INSERT INTO `period` (`id`, `name`, `start_date`, `end_date`) VALUES
+(1, 'Februari 2014', '2014-02-01', '2014-02-28'),
+(2, 'Mars 2014', '2014-03-01', '2014-03-31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `points_booked`
+--
+
+CREATE TABLE IF NOT EXISTS `points_booked` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `worked` int(11) NOT NULL,
-  `booked` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `event_id` int(11) NOT NULL,
+  `points` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`event_id`),
+  KEY `event_id` (`event_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `score`
+-- Dumping data for table `points_booked`
 --
 
-INSERT INTO `score` (`user_id`, `worked`, `booked`) VALUES
-(1, 5, 0),
-(2, 4, 3);
+INSERT INTO `points_booked` (`id`, `user_id`, `event_id`, `points`) VALUES
+(1, 1, 1, 3),
+(2, 1, 2, 6),
+(3, 2, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `points_worked`
+--
+
+CREATE TABLE IF NOT EXISTS `points_worked` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `points` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`event_id`),
+  KEY `event_id` (`event_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `points_worked`
+--
+
+INSERT INTO `points_worked` (`id`, `user_id`, `event_id`, `points`) VALUES
+(3, 1, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -81,10 +153,18 @@ INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_
 --
 
 --
--- Constraints for table `score`
+-- Constraints for table `points_booked`
 --
-ALTER TABLE `score`
-  ADD CONSTRAINT `score_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `points_booked`
+  ADD CONSTRAINT `points_booked_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `points_booked_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `points_worked`
+--
+ALTER TABLE `points_worked`
+  ADD CONSTRAINT `points_worked_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `points_worked_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
