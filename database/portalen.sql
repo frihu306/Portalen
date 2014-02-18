@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 18, 2014 at 02:19 PM
+-- Generation Time: Feb 18, 2014 at 05:20 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
-  `points` int(11) NOT NULL,
+  `points` int(11) NOT NULL DEFAULT '0',
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
