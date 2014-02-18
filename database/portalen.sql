@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 18, 2014 at 12:48 AM
+-- Generation Time: Feb 18, 2014 at 11:12 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `points_worked` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`event_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `points_worked`
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_name` varchar(50) NOT NULL,
   `phone_number` varchar(50) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
-  `adress` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
   `zip` varchar(5) DEFAULT NULL,
   `city` varchar(50) DEFAULT NULL,
   `avatar` varchar(200) DEFAULT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `adress`, `zip`, `city`, `avatar`, `date_created`, `bank_account`, `special_food`) VALUES
+INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `address`, `zip`, `city`, `avatar`, `date_created`, `bank_account`, `special_food`) VALUES
 (1, 'Valross', 'valross@mail.com', '1111111234', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', NULL, NULL, NULL, NULL, NULL, '0000-00-00', NULL, NULL),
 (2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, NULL, NULL, NULL, NULL, '0000-00-00', NULL, NULL);
 
