@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 18, 2014 at 11:38 AM
+-- Generation Time: Feb 18, 2014 at 12:40 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -44,6 +44,33 @@ INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`) VALUES
 (1, 'Pizzaonsdag', '2014-02-19 18:00:00', '2014-02-19 22:00:00', 1),
 (2, 'Vårkravallen', '2014-03-08 22:00:00', '2014-03-09 03:00:00', 2),
 (3, 'Sittning', '2014-02-15 15:00:00', '2014-02-15 16:00:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `group`
+--
+
+CREATE TABLE IF NOT EXISTS `group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` int(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `name_2` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `group_member`
+--
+
+CREATE TABLE IF NOT EXISTS `group_member` (
+  `group_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`group_id`,`user_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -150,6 +177,35 @@ INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_
 (1, 'Valross', 'valross@mail.com', '1111111234', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', NULL, NULL, NULL, NULL, NULL, '0000-00-00', NULL, NULL),
 (2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, NULL, NULL, NULL, NULL, '0000-00-00', NULL, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_work`
+--
+
+CREATE TABLE IF NOT EXISTS `user_work` (
+  `work_slot_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `checked` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`work_slot_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `work_slot`
+--
+
+CREATE TABLE IF NOT EXISTS `work_slot` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `points` int(11) NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 --
 -- Constraints for dumped tables
 --
@@ -159,6 +215,13 @@ INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_
 --
 ALTER TABLE `event`
   ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`period_id`) REFERENCES `period` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `group_member`
+--
+ALTER TABLE `group_member`
+  ADD CONSTRAINT `group_member_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `group_member_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `points_booked`
