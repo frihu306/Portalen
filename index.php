@@ -12,23 +12,31 @@
 	//Score progress bar calculation
 	$date = date('Y-m-d');
 
-	$workedPointsResult = DBQuery::sql("SELECT points FROM points_worked WHERE event_id IN
+	/*$workedPointsResult = DBQuery::sql("SELECT points FROM points_worked WHERE event_id IN
 						(SELECT id FROM event WHERE period_id IN 
 							(SELECT id FROM period WHERE start_date <= '$date' AND end_date >= '$date')
 						) AND
 						user_id IN
 						(SELECT id FROM user WHERE id = '$_SESSION[user_id]')
-					");
+					");*/
+					
+	$workedPointsResult = DBQuery::sql	("SELECT points FROM work_slot WHERE event_id IN
+											(SELECT id FROM event WHERE period_id IN 
+												(SELECT id FROM period WHERE start_date <= '$date' AND end_date >= '$date')
+											) 
+										AND id IN
+											(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '1')
+										");
 					
 	$workedPoints = 0;
 	
-	$bookedPointsResult = DBQuery::sql("SELECT points FROM points_booked WHERE event_id IN
-						(SELECT id FROM event WHERE period_id IN 
-							(SELECT id FROM period WHERE start_date <= '$date' AND end_date >= '$date')
-						) AND
-						user_id IN
-						(SELECT id FROM user WHERE id = '$_SESSION[user_id]')
-					");
+	$bookedPointsResult = DBQuery::sql	("SELECT points FROM work_slot WHERE event_id IN
+											(SELECT id FROM event WHERE period_id IN 
+												(SELECT id FROM period WHERE start_date <= '$date' AND end_date >= '$date')
+											) 
+										AND id IN
+											(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '0')
+										");
 					
 	$bookedPoints = 0;
 					

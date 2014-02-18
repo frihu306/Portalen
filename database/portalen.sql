@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 18, 2014 at 12:40 PM
--- Server version: 5.5.24-log
--- PHP Version: 5.4.3
+-- Generation Time: Feb 18, 2014 at 02:19 PM
+-- Server version: 5.6.12-log
+-- PHP Version: 5.4.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `portalen`
 --
+CREATE DATABASE IF NOT EXISTS `portalen` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `portalen`;
 
 -- --------------------------------------------------------
 
@@ -34,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `period_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `period_id` (`period_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `event`
@@ -43,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `event` (
 INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`) VALUES
 (1, 'Pizzaonsdag', '2014-02-19 18:00:00', '2014-02-19 22:00:00', 1),
 (2, 'Vårkravallen', '2014-03-08 22:00:00', '2014-03-09 03:00:00', 2),
-(3, 'Sittning', '2014-02-15 15:00:00', '2014-02-15 16:00:00', 1);
+(4, 'Sittning', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -53,11 +55,18 @@ INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` int(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `name_2` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `group`
+--
+
+INSERT INTO `group` (`id`, `name`) VALUES
+(2, 'webb');
 
 -- --------------------------------------------------------
 
@@ -71,6 +80,13 @@ CREATE TABLE IF NOT EXISTS `group_member` (
   PRIMARY KEY (`group_id`,`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `group_member`
+--
+
+INSERT INTO `group_member` (`group_id`, `user_id`) VALUES
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -93,54 +109,6 @@ CREATE TABLE IF NOT EXISTS `period` (
 INSERT INTO `period` (`id`, `name`, `start_date`, `end_date`) VALUES
 (1, 'Februari 2014', '2014-02-01', '2014-02-28'),
 (2, 'Mars 2014', '2014-03-01', '2014-03-31');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `points_booked`
---
-
-CREATE TABLE IF NOT EXISTS `points_booked` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `event_id` int(11) NOT NULL,
-  `points` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`,`event_id`),
-  KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `points_booked`
---
-
-INSERT INTO `points_booked` (`id`, `user_id`, `event_id`, `points`) VALUES
-(1, 1, 1, 3),
-(2, 1, 2, 6),
-(3, 2, 1, 3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `points_worked`
---
-
-CREATE TABLE IF NOT EXISTS `points_worked` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `event_id` int(11) NOT NULL,
-  `points` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`,`event_id`),
-  KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `points_worked`
---
-
-INSERT INTO `points_worked` (`id`, `user_id`, `event_id`, `points`) VALUES
-(3, 1, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -187,8 +155,18 @@ CREATE TABLE IF NOT EXISTS `user_work` (
   `work_slot_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `checked` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`work_slot_id`)
+  PRIMARY KEY (`work_slot_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_work`
+--
+
+INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
+(4, 1, 0),
+(5, 1, 1),
+(6, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -201,10 +179,21 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   `group_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
   `points` int(11) NOT NULL,
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `group_id` (`group_id`),
+  KEY `event_id` (`event_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `work_slot`
+--
+
+INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `end_time`) VALUES
+(4, 2, 1, 3, '2014-02-19 17:00:00', '2014-02-19 23:00:00'),
+(5, 2, 4, 4, '2014-02-14 16:00:00', '2014-02-15 00:00:00'),
+(6, 2, 1, 3, '2014-02-19 17:00:00', '2014-02-19 23:00:00');
 
 --
 -- Constraints for dumped tables
@@ -224,18 +213,18 @@ ALTER TABLE `group_member`
   ADD CONSTRAINT `group_member_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `points_booked`
+-- Constraints for table `user_work`
 --
-ALTER TABLE `points_booked`
-  ADD CONSTRAINT `points_booked_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `points_booked_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `user_work`
+  ADD CONSTRAINT `user_work_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_work_ibfk_1` FOREIGN KEY (`work_slot_id`) REFERENCES `work_slot` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `points_worked`
+-- Constraints for table `work_slot`
 --
-ALTER TABLE `points_worked`
-  ADD CONSTRAINT `points_worked_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `points_worked_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `work_slot`
+  ADD CONSTRAINT `work_slot_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `work_slot_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
