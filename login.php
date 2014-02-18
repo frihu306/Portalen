@@ -24,7 +24,11 @@ if(isset($_POST['log_in']))
 		$_SESSION['name'] = $result[0]['name'];
 		$_SESSION['last_name'] = $result[0]['last_name'];
 		//Change to hardcoded url later to get rid of index.php in url
-		header('Location: index.php');
+		?>
+		<script>
+			window.location = "index.php";
+		</script>
+		<?php
 	}
 }
 
