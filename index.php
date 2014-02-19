@@ -33,7 +33,7 @@
 			 
 			  <div class="your-period">
  					 <p>
- 					  <small>Din period: <strong>1 feb - 28 feb</strong></small>
+ 					  <small>Din period: <strong><?php echo $periodStart.' - '.$periodEnd; ?></strong></small>
  					  </p>
 					  
 					  <div class="progress">
@@ -111,14 +111,16 @@
 				 <div class="col-sm-12">
 				 	<h4 style="font-weight: 200;">Kommande pass</h4>
 					<?php
-						loadUpcomingEvents($upcomingEvents);
+						loadUpcomingEvents($date);
 					?>
 			 	 </div>
    		 	 </div>
    		 	 <div class="row">
 				 <div class="col-sm-5">
 					 <div class="row">
-						 <div class="col-sm-12"><h4>Dina bokade pass</h4></div>
+						 <div class="col-sm-12"><h4>Dina bokade pass</h4>
+							<?php loadBookedEvents(); ?>
+						 </div>
 						 <div class="col-sm-12"><h4>Lediga pass</h4></div>
 				 	</div>
 				 </div>

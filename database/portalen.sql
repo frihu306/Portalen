@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 18, 2014 at 05:20 PM
--- Server version: 5.6.12-log
--- PHP Version: 5.4.12
+-- Generation Time: Feb 19, 2014 at 12:12 AM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.4.3
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `portalen`
 --
-CREATE DATABASE IF NOT EXISTS `portalen` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `portalen`;
 
 -- --------------------------------------------------------
 
@@ -34,18 +32,43 @@ CREATE TABLE IF NOT EXISTS `event` (
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
   `period_id` int(11) NOT NULL,
+  `event_type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `period_id` (`period_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  KEY `period_id` (`period_id`),
+  KEY `event_type_id` (`event_type_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`) VALUES
-(1, 'Pizzaonsdag', '2014-02-19 18:00:00', '2014-02-19 22:00:00', 1),
-(2, 'Vårkravallen', '2014-03-08 22:00:00', '2014-03-09 03:00:00', 2),
-(4, 'Sittning', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1);
+INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`, `event_type_id`) VALUES
+(1, 'Pizzaonsdag', '2014-02-19 18:00:00', '2014-02-19 22:00:00', 1, 1),
+(2, 'Vårkravallen', '2014-03-08 22:00:00', '2014-03-09 03:00:00', 2, 2),
+(4, 'Sittning', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1, 3),
+(5, 'Personalfest', '2014-03-09 18:30:00', '2014-03-10 03:00:00', 2, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_type`
+--
+
+CREATE TABLE IF NOT EXISTS `event_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `event_type`
+--
+
+INSERT INTO `event_type` (`id`, `name`) VALUES
+(1, 'Pub'),
+(2, 'Nattklubb'),
+(3, 'Sittning'),
+(4, 'Personalaktivitet');
 
 -- --------------------------------------------------------
 
@@ -166,7 +189,8 @@ CREATE TABLE IF NOT EXISTS `user_work` (
 INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (4, 1, 0),
 (5, 1, 1),
-(6, 2, 0);
+(6, 2, 0),
+(7, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -184,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -193,7 +217,9 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
 INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `end_time`) VALUES
 (4, 2, 1, 3, '2014-02-19 17:00:00', '2014-02-19 23:00:00'),
 (5, 2, 4, 4, '2014-02-14 16:00:00', '2014-02-15 00:00:00'),
-(6, 2, 1, 3, '2014-02-19 17:00:00', '2014-02-19 23:00:00');
+(6, 2, 1, 3, '2014-02-19 17:00:00', '2014-02-19 23:00:00'),
+(7, 2, 2, 6, '2014-03-08 19:00:00', '2014-03-09 05:00:00'),
+(8, 2, 2, 6, '2014-03-08 19:00:00', '2014-03-09 05:00:00');
 
 --
 -- Constraints for dumped tables
@@ -203,6 +229,7 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
+  ADD CONSTRAINT `event_ibfk_2` FOREIGN KEY (`event_type_id`) REFERENCES `event_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`period_id`) REFERENCES `period` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
