@@ -35,6 +35,8 @@ if(isset($_POST['log_in']))
 
 ?>
 
+
+
 <html>
 <head>
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -52,13 +54,14 @@ if(isset($_POST['log_in']))
 
       /* The white background content wrapper */
       .container > .content {
-        background-color: #fff;
+        background-color: #f5f5f5;
         padding: 20px;
-        margin: 0 -20px; 
+        margin: 0 -10px;
+		border-top: 8px solid #f99929;
       }
 
 	  .login-form {
-		margin-left: 65px;
+		margin-top: 20px;
 	  }
 	
 	  legend {
@@ -67,16 +70,27 @@ if(isset($_POST['log_in']))
 	  	color: #404040;
 	  }
 	  
+	  textarea:focus, input:focus{
+    outline: 0;
+}
+	  
 	  .btn-primary {
 		color: #ffffff;
 		background-color: #428bca;
 	  }
+	  
+	  input {
+	  background: #fff;
+	  padding: 4px;
+	  border-color: #fff;
+	  }
 
 	  .btn {
 		display: inline-block;
-		float: right;
 		padding: 6px 12px;
-		margin-bottom: 0;
+		margin-bottom: -20;
+		margin-left: 112;
+		margin-top: 10px;
 		font-size: 14px;
 		color: #fff;
 		font-weight: normal;
@@ -93,30 +107,55 @@ if(isset($_POST['log_in']))
 		-o-user-select: none;
 		user-select: none;
 }
+
+box {
+background: #f99929;
+padding: 8px;
+
+}
+
+.orange {
+color: #fff;
+
+}
+
+input:-webkit-autofill {
+-webkit-box-shadow: 0 0 0px 1000px #fff inset;
+}
+
+input, input[type="password"], input[type="search"], isindex {
+background-color: white;
+border-top: 2px solid #eeeeee;
+border-bottom: 2px solid #eeeeee;
+border-right: 2px solid #eeeeee;
+border-left: 0px solid;
+-webkit-rtl-ordering: logical;
+-webkit-user-select: text;
+cursor: auto;
+}
     </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
   <div class="container">
-    <div class="content">
-      <div class="row">
-        <div class="login-form">
-          <h2>Login</h2>
-          <form action="" method="post">
-            <fieldset>
-              <div class="clearfix">
-                <input type="text" placeholder="Username" name="user_name" >
-              </div>
-              <div class="clearfix">
-                <input type="password" placeholder="Password" name="password">
-              </div>
-              <button class="btn primary" type="submit" name="log_in">Sign in</button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
+			<div class="content">
+			  <div class="row"><center>
+				<div class="login-form">
+				  <form action="" method="post">
+					<fieldset>
+					  <div class="clearfix">
+						<box><span class="glyphicon glyphicon-user  orange"></span> </box><input type="text" placeholder="Username" name="user_name" >
+					  </div></br>
+					  <div class="clearfix">
+					   <box><span class="glyphicon glyphicon-lock orange"></span> </box> <input type="password" placeholder="Password" name="password">
+					  </div>
+					  <button class="btn primary" type="submit" name="log_in">Logga in</button>
+					</fieldset>
+				  </form></center>
+				</div>
+			 </div>
+	</div>
   </div> <!-- /container -->
 </body>
 </html>
