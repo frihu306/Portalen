@@ -3,7 +3,9 @@ include_once('php/DBQuery.php');
 	
 	
 	//Score progress bar calculation
-	$date = date('Y-m-d');
+	$date = new DateTime;
+	$date->setTimezone(new DateTimeZone('Europe/Stockholm'));
+	$date = $date->format('Y-m-d H:i:s');
 					
 	$workedPointsResult = DBQuery::sql	("SELECT points FROM work_slot WHERE event_id IN
 											(SELECT id FROM event WHERE period_id IN 
@@ -49,9 +51,9 @@ include_once('php/DBQuery.php');
 	//Load upcoming events
 	function loadUpcomingEvents($date)
 	{
-		$upcomingEvents = DBQuery::sql("SELECT * FROM event WHERE start_time >= '$date' ORDER BY start_time LIMIT 3");
+		$upcomingEvents = DBQuery::sql("SELECT * FROM event WHERE start_time > '$date' ORDER BY start_time LIMIT 3");
 		$eventTypes = DBQuery::sql	("SELECT name FROM event_type WHERE id IN 
-										(SELECT event_type_id FROM event WHERE start_time >= '$date' ORDER BY start_time)
+										(SELECT event_type_id FROM event WHERE start_time > '$date' ORDER BY start_time)
 									LIMIT 3");
 		for($i = 0; $i < count($upcomingEvents); ++$i)
 		{
@@ -138,6 +140,8 @@ include_once('php/DBQuery.php');
 		$periodEnd = strtolower($periodEnd->format('j M'));
 		$periodStart = str_replace('y', 'j', $periodStart);
 		$periodStart = str_replace('c', 'k', $periodStart);
+		$periodEnd = str_replace('y', 'j', $periodEnd);
+		$periodEnd = str_replace('c', 'k', $periodEnd);
 	}
 	//
 	//Load booked events
