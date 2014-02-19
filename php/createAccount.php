@@ -1,9 +1,8 @@
 <?php
 	include_once('DBQuery.php');
 
-	if(isset($_POST['submit']) && $_POST['submit'] == 'Skapa konto')
+	if(isset($_POST['submit']))
 	{
-		$_POST['submit'] == null;
 		$userName = $_POST['user_name'];
 		$password = $_POST['password'];
 		$passwordMD5 = md5('d98b05a7c7add6fa22b8de62444da5a5'.$password.'d99947dd2b0329f55babeaa6597fb7c8');
@@ -17,7 +16,13 @@
 		{
 			DBQuery::sql("INSERT INTO user (user_name, password, ssn, mail, name, last_name)
 							VALUES ('$userName', '$passwordMD5', '$ssn', '$mail', '$name', '$lastName')");
+			?>
+			<script>
+				window.location = "createAccount.php";
+			</script>
+			<?php
 		}
+		
 	}
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
