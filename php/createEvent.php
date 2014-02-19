@@ -11,7 +11,7 @@
 		
 		$periodId = DBQuery::sql("SELECT id FROM period WHERE start_date < '$start' AND end_date > '$start'");
 		$periodId = $periodId[0]['id'];
-		if($name != '' && $type != '' && $start != '' && $end != '')
+		if($name != '' && $type != '' && $start != '' && $end != '' && $start < $end)
 		{
 			DBQuery::sql("INSERT INTO event (name, event_type_id, start_time, end_time, period_id)
 							VALUES ('$name', '$type', '$start', '$end', '$periodId')");
