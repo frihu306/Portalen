@@ -47,17 +47,15 @@ include_once('php/DBQuery.php');
 	}
 	//
 	//Load upcoming events
-	$upcomingEvents = DBQuery::sql("SELECT * FROM event WHERE start_time >= '$date' ORDER BY start_time LIMIT 3");
-	$eventTypes = DBQuery::sql	("SELECT name FROM event_type WHERE id IN 
-									(SELECT event_type_id FROM event WHERE start_time >= '$date' ORDER BY start_time)
-								LIMIT 3");
-								
-	
-	function loadUpcomingEvents($events, $types)
+	function loadUpcomingEvents($date)
 	{
-		for($i = 0; $i < count($events); ++$i)
+		$upcomingEvents = DBQuery::sql("SELECT * FROM event WHERE start_time >= '$date' ORDER BY start_time LIMIT 3");
+		$eventTypes = DBQuery::sql	("SELECT name FROM event_type WHERE id IN 
+										(SELECT event_type_id FROM event WHERE start_time >= '$date' ORDER BY start_time)
+									LIMIT 3");
+		for($i = 0; $i < count($upcomingEvents); ++$i)
 		{
-			$eventId = $events[$i]['id'];
+			$eventId = $upcomingEvents[$i]['id'];
 			$workSlots = DBQuery::sql("SELECT * FROM work_slot WHERE event_id = '$eventId'");
 			$availableSlots = DBQuery::sql	("SELECT * FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
 												(SELECT work_slot_id FROM user_work)
@@ -65,14 +63,14 @@ include_once('php/DBQuery.php');
 			$workSlotsCount = count($workSlots);
 			$availableSlotsCount = count($availableSlots);
 			
-			$name = $events[$i]['name'];
-			$date = new DateTime($events[$i]['start_time']);
+			$name = $upcomingEvents[$i]['name'];
+			$date = new DateTime($upcomingEvents[$i]['start_time']);
 			$day = $date->format('j');
 			$month = $date->format('m');
 			$start = $date->format('H:i');
-			$end = new DateTime($events[$i]['end_time']);
+			$end = new DateTime($upcomingEvents[$i]['end_time']);
 			$end = $end->format('H:i');
-			$type = $types[$i]['name'];
+			$type = $eventTypes[$i]['name'];
 			switch($month)
 			{
 			case '01':
@@ -141,5 +139,37 @@ include_once('php/DBQuery.php');
 		$periodStart = str_replace('y', 'j', $periodStart);
 		$periodStart = str_replace('c', 'k', $periodStart);
 	}
-	
+	//
+	//Load booked events
+	function loadBookedEvents()
+	{
+		$bookedEvents = DBQuery::sql("SELECT name FROM event WHERE id IN
+										(SELECT event_id FROM work_slot WHERE id IN
+										(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '0')
+										) 
+									ORDER BY start_time
+									");
+								
+		$workTimes = DBQuery::sql	("SELECT start_time, end_time, points FROM work_slot WHERE id IN
+										(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '0')
+									ORDER BY start_time
+									");
+								
+		for($i = 0; $i < count($bookedEvents); ++$i)
+		{
+			$name = $bookedEvents[$i]['name'];
+			$start = new DateTime($workTimes[$i]['start_time']);
+			$start = $start->format('j/n H:i');
+			$end = new DateTime($workTimes[$i]['end_time']);
+			$end = $end->format('H:i');
+			$points = $workTimes[$i]['points'];
+			?>
+			
+			<p>
+				<?php echo $start.'-'.$end.' '.$name.' '.$points.'p'; ?>
+			</p>
+			
+			<?php
+		}
+	}
 ?>
