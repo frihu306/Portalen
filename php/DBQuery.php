@@ -64,11 +64,14 @@ class DBQuery
 		$result = mysql_query($sql);
 		DBConnect::close();
 		$rows = array();
-		while($row = mysql_fetch_array($result))
+		if(strtolower(substr($sql,0,6)) == 'select')
 		{
-			array_push($rows,$row);
+			while($row = mysql_fetch_array($result))
+			{
+				array_push($rows,$row);
+			}
+			return $rows;
 		}
-		return $rows;
 	}
 }
 
