@@ -58,8 +58,8 @@ include_once('php/DBQuery.php');
 		for($i = 0; $i < count($upcomingEvents); ++$i)
 		{
 			$eventId = $upcomingEvents[$i]['id'];
-			$workSlots = DBQuery::sql("SELECT * FROM work_slot WHERE event_id = '$eventId'");
-			$availableSlots = DBQuery::sql	("SELECT * FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
+			$workSlots = DBQuery::sql("SELECT id FROM work_slot WHERE event_id = '$eventId'");
+			$availableSlots = DBQuery::sql	("SELECT id FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
 												(SELECT work_slot_id FROM user_work)
 											");
 			$workSlotsCount = count($workSlots);

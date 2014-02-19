@@ -18,7 +18,7 @@ if(isset($_POST['log_in']))
 	$passwordMD5 = md5('d98b05a7c7add6fa22b8de62444da5a5'.$password.'d99947dd2b0329f55babeaa6597fb7c8');
 	$passwordMD5 = md5($passwordMD5);
 	
-	$result = DBQuery::sql("SELECT * FROM user WHERE user_name = '$userName' AND BINARY password = '$passwordMD5'");
+	$result = DBQuery::sql("SELECT id, name, last_name FROM user WHERE user_name = '$userName' AND BINARY password = '$passwordMD5'");
 	if(count($result) == 1)
 	{
 		$_SESSION['user_id'] = $result[0]['id'];
