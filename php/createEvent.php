@@ -1,6 +1,10 @@
 <?php
 	include_once('DBQuery.php');
-
+	
+	$date = new DateTime;
+	$date->setTimezone(new DateTimeZone('Europe/Stockholm'));
+	$date = $date->format('Y-m-d');
+	
 	if(isset($_POST['submit']))
 	{
 		$_POST['submit'] == null;
@@ -11,7 +15,7 @@
 		
 		$periodId = DBQuery::sql("SELECT id FROM period WHERE start_date < '$start' AND end_date > '$start'");
 		$periodId = $periodId[0]['id'];
-		if($name != '' && $type != '' && $start != '' && $end != '' && $start < $end)
+		if($name != '' && $type != 'no' && $start != '' && $end != '' && $start < $end)
 		{
 			DBQuery::sql("INSERT INTO event (name, event_type_id, start_time, end_time, period_id)
 							VALUES ('$name', '$type', '$start', '$end', '$periodId')");
@@ -48,6 +52,7 @@
 	<p><input type="text" placeholder="Namn" name="name"/></p>
 	<p>
 		<select name="type">
+			<option value="no">Välj typ</option>
 			<?php loadTypes(); ?>
 		</select>
 	</p>
