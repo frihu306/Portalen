@@ -41,7 +41,7 @@ if(isset($_POST['log_in']))
     <style type="text/css">
       /* Override some defaults */
       html, body {
-        background-color: #eee;
+        background-color: #363430;
       }
       body {
         padding-top: 40px; 
