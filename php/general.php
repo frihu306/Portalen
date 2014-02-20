@@ -51,10 +51,11 @@ if($bookedPointsPercent > 100 - $workedPointsPercent)
 //Load upcoming events
 function loadUpcomingEvents($date)
 {
-	$upcomingEvents = DBQuery::sql("SELECT * FROM event WHERE start_time > '$date' ORDER BY start_time LIMIT 3");
-	$eventTypes = DBQuery::sql	("SELECT name FROM event_type WHERE id IN 
-									(SELECT event_type_id FROM event WHERE start_time > '$date' ORDER BY start_time)
-								LIMIT 3");
+	$upcomingEvents = DBQuery::sql("SELECT event.id, event.name AS event_name, event.start_time, event.end_time, event_type.name AS type_name FROM event 
+									INNER JOIN event_type ON event.event_type_id = event_type.id 
+									WHERE start_time > '2014-02-20' ORDER BY start_time LIMIT 3");
+								
+	
 	for($i = 0; $i < count($upcomingEvents); ++$i)
 	{
 		$eventId = $upcomingEvents[$i]['id'];
@@ -65,14 +66,14 @@ function loadUpcomingEvents($date)
 		$workSlotsCount = count($workSlots);
 		$availableSlotsCount = count($availableSlots);
 		
-		$name = $upcomingEvents[$i]['name'];
+		$name = $upcomingEvents[$i]['event_name'];
 		$date = new DateTime($upcomingEvents[$i]['start_time']);
 		$day = $date->format('j');
 		$month = $date->format('m');
 		$start = $date->format('H:i');
 		$end = new DateTime($upcomingEvents[$i]['end_time']);
 		$end = $end->format('H:i');
-		$type = $eventTypes[$i]['name'];
+		$type = $upcomingEvents[$i]['type_name'];
 		switch($month)
 		{
 		case '01':
