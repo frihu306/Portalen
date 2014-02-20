@@ -142,7 +142,7 @@ cursor: auto;
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
-<body><center><a href="/" class="logo"><img src="img/border.png"></a></center>
+<body><center><a href="/" class="logo"><img src="img/border2.png"></a></center>
   <div class="container">
 			<div class="content">
 			  <div class="row"><center>
