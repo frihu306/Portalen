@@ -47,6 +47,17 @@ function loadTemplates()
 	}
 }
 
+function loadGroups()
+{
+	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
+	for($i = 0; $i < count($groups); ++$i)
+	{
+		?>
+			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['name']; ?></option>
+		<?php
+	}
+}
+
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
@@ -87,8 +98,8 @@ function getTemplate(id)
 		{
 			var jsonObj = JSON.parse(xmlhttp.responseText);
 			var date = new Date();
-			document.getElementById("type" + jsonObj.type).selected = "selected";
-			document.getElementById("start").value = date.yyyymmdd() + " " + jsonObj.start;
+			$("#type" + jsonObj.type).attr("selected", "selected");
+			$("#start").attr("value", date.yyyymmdd() + " " + jsonObj.start);
 			
 			var endDate = new Date();
 			if(jsonObj.end < jsonObj.start)
@@ -96,11 +107,21 @@ function getTemplate(id)
 				endDate.setDate(date.getDate() + 1);
 			}
 			
-			document.getElementById("end").value = endDate.yyyymmdd() + " " + jsonObj.end;
+			$("#end").attr("value", endDate.yyyymmdd() + " " + jsonObj.end);
 		}
 	}
 	xmlhttp.open("GET","askTemplate.php?template_id="+id, true);
 	xmlhttp.send();
+}
+
+function addGroup()
+{
+	var group = $("#group option:selected").text();
+	var amount = $("#group_amount").val();
+	for(var i = 0; i < amount; ++i)
+	{
+		$("#added_groups").append("<p>"+ group +"</p>");
+	}
 }
 
 </script>
@@ -120,5 +141,14 @@ function getTemplate(id)
 	</p>
 	<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $date; ?>"/></p>
 	<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $date; ?>"/></p>
-	<p><input type="submit" name="submit" value="Skapa event"/></p>
+	<p>
+		<input type="button" value="Lägg till pass" onClick="addGroup()"/>
+		<select id="group" name="group">
+			<?php loadGroups(); ?>
+		</select>
+		<input id="group_amount" type="text" name="group_amount" value="0"/>
+	<p>
+	<div id="added_groups">
+	</div>
+	<input type="submit" name="submit" value="Skapa event"/></p>
 </form>

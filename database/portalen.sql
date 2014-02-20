@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2014 at 02:09 AM
+-- Generation Time: Feb 20, 2014 at 02:02 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -34,9 +34,10 @@ CREATE TABLE IF NOT EXISTS `event` (
   `period_id` int(11) NOT NULL,
   `event_type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `event`
@@ -48,7 +49,8 @@ INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`, `event
 (4, 'Sittning', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1, 3),
 (5, 'Personalfest', '2014-03-09 18:30:00', '2014-03-10 03:00:00', 2, 4),
 (7, 'MT <3 GDK', '2014-02-22 18:00:00', '2014-02-22 22:00:00', 1, 3),
-(8, 'Torsdagsklubben', '2014-02-20 22:00:00', '2014-02-21 03:00:00', 1, 2);
+(8, 'Torsdagsklubben', '2014-02-20 22:00:00', '2014-02-21 03:00:00', 1, 2),
+(9, 'Den fina sittningen', '2014-02-26 18:00:00', '2014-02-26 22:00:00', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -65,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `event_template` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `event_type_id` (`event_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `event_template`
@@ -73,7 +75,8 @@ CREATE TABLE IF NOT EXISTS `event_template` (
 
 INSERT INTO `event_template` (`id`, `name`, `start_time`, `end_time`, `event_type_id`) VALUES
 (5, 'Onsdagspub', '18:00:00', '22:00:00', 1),
-(6, 'Vanlig nattklubb', '22:00:00', '03:00:00', 2);
+(6, 'Vanlig nattklubb', '22:00:00', '03:00:00', 2),
+(7, 'Vanlig pub', '18:00:00', '01:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -102,7 +105,8 @@ CREATE TABLE IF NOT EXISTS `event_template_group` (
 CREATE TABLE IF NOT EXISTS `event_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
@@ -110,31 +114,10 @@ CREATE TABLE IF NOT EXISTS `event_type` (
 --
 
 INSERT INTO `event_type` (`id`, `name`) VALUES
-(1, 'Pub'),
 (2, 'Nattklubb'),
-(3, 'Sittning'),
-(4, 'Personalaktivitet');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `group`
---
-
-CREATE TABLE IF NOT EXISTS `group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  UNIQUE KEY `name_2` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `group`
---
-
-INSERT INTO `group` (`id`, `name`) VALUES
-(2, 'webb');
+(4, 'Personalaktivitet'),
+(1, 'Pub'),
+(3, 'Sittning');
 
 -- --------------------------------------------------------
 
@@ -243,6 +226,29 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `work_group`
+--
+
+CREATE TABLE IF NOT EXISTS `work_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `name_2` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `work_group`
+--
+
+INSERT INTO `work_group` (`id`, `name`) VALUES
+(4, 'Bar'),
+(3, 'Kock'),
+(2, 'Webb');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `work_slot`
 --
 
@@ -290,14 +296,14 @@ ALTER TABLE `event_template`
 -- Constraints for table `event_template_group`
 --
 ALTER TABLE `event_template_group`
-  ADD CONSTRAINT `event_template_group_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `event_template_group_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `event_template_group_ibfk_1` FOREIGN KEY (`event_template_id`) REFERENCES `event_template` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `group_member`
 --
 ALTER TABLE `group_member`
-  ADD CONSTRAINT `group_member_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `group_member_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `group_member_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -311,7 +317,7 @@ ALTER TABLE `user_work`
 -- Constraints for table `work_slot`
 --
 ALTER TABLE `work_slot`
-  ADD CONSTRAINT `work_slot_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `work_slot_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `work_slot_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
