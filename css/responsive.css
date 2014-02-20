@@ -20,14 +20,20 @@ body {height: 100%; }
 	#sidebar .your-period {
 		display: none;
 	}
+	
+	#content {
+		padding: 20px;
+	}	
 }
 
 
 
 
 @media (min-width: 992px) {
+	
 	#content {
 		margin-left: 240px;
+		padding: 10px 30px 30px 30px;
 	}
 	
 	#sidebar {
