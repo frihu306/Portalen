@@ -27,7 +27,7 @@ if(isset($_POST['submit']))
 }
 function loadTypes()
 {
-	$types = DBQuery::sql("SELECT id, name FROM event_type");
+	$types = DBQuery::sql("SELECT id, name FROM event_type ORDER BY name");
 	for($i = 0; $i < count($types); ++$i)
 	{
 		?>
@@ -38,7 +38,7 @@ function loadTypes()
 
 function loadTemplates()
 {
-	$templates = DBQuery::sql("SELECT id, name FROM event_template");
+	$templates = DBQuery::sql("SELECT id, name FROM event_template ORDER BY name");
 	for($i = 0; $i < count($templates); ++$i)
 	{
 		?>
