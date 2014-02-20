@@ -1,25 +1,11 @@
 <?php
-	session_start();
-	if(!isset($_SESSION['user_id']))
-	{
-		header('Location: login.php');
-	}
-	
-	include_once('php/DBQuery.php');
-	
-	//Score progress bar calculation
-	$score = DBQuery::getRow('score', 'user_id', $_SESSION['user_id']);
-	
-	$workedPoints = $score['worked'];
-	$bookedPoints = $score['booked'];
-	
-	$workedPointsPercent = $workedPoints / 8 * 100;
-	$bookedPointsPercent = $bookedPoints / 8 * 100;
-	if($bookedPointsPercent > 100 - $workedPointsPercent)
-	{
-		$bookedPointsPercent = 100 - $workedPointsPercent;
-	}
-	
+session_start();
+if(!isset($_SESSION['user_id']))
+{
+	header('Location: login.php');
+}
+
+include_once('php/general.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,7 +33,7 @@
 			 
 			  <div class="your-period">
  					 <p>
- 					  <small>Din period: <strong>1 feb - 28 feb</strong></small>
+ 					  <small>Din period: <strong><?php echo $periodStart.' - '.$periodEnd; ?></strong></small>
  					  </p>
 					  
 					  <div class="progress">
@@ -79,7 +65,7 @@
 		          </div>
 				  
 				  
-		          <div class="navbar-collapse collapse">
+		          <div class="navbar-collapse collapse" style="border: 1px solid #f00;">
 		            <ul class="main-nav">
 		              <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span>Hem</a></li>
 		              <li class="dropdown">
@@ -124,39 +110,17 @@
    		 	 <div class="row">
 				 <div class="col-sm-12">
 				 	<h4 style="font-weight: 200;">Kommande pass</h4>
+					<?php
+						loadUpcomingEvents($date);
+					?>
 			 	 </div>
-				 <div class="col-sm-4">
-					 <div class="upcoming-event">
-						 <strong>Ljud & Ljus - Riggning</strong><br /> 15:e februari 12.00-15.00
-					 </div>
-					 <div class="upcoming-event-info" style="overflow: hidden;">
-						 <small><p style="float: left;">Lediga pass <br /><strong>2/16</strong></p>
-						 <p style="float: right">Arrangemangstyp <br /><strong>Annorlunda pubkväll</strong></p></small>
-					 </div>
-				 </div>
-				 <div class="col-sm-4">
-					 <div class="upcoming-event">
-						 <strong>Webblagsmöte</strong><br /> 20:e februari 17.00-18.00
-					 </div>
-					 <div class="upcoming-event-info" style="overflow: hidden;">
-						 <small><p style="float: left;">Lediga pass <br /><strong>2/16</strong></p>
-						 <p style="float: right">Arrangemangstyp <br /><strong>Personalaktivitet</strong></p></small>
-					 </div>
-				 </div>
-				 <div class="col-sm-4">
-					 <div class="upcoming-event">
-						 <strong>MT GDK-sittning</strong><br /> 22:e februari 18.15-22.00
-					 </div>
-					 <div class="upcoming-event-info" style="overflow: hidden;">
-						 <small><p style="float: left;">Lediga pass <br /><strong>10/16</strong></p>
-						 <p style="float: right">Arrangemangstyp <br /><strong>Personalaktivitet</strong></p></small>
-					 </div>
-				 </div>
    		 	 </div>
    		 	 <div class="row">
 				 <div class="col-sm-5">
 					 <div class="row">
-						 <div class="col-sm-12"><h4>Dina bokade pass</h4></div>
+						 <div class="col-sm-12"><h4>Dina bokade pass</h4>
+							<?php loadBookedEvents(); ?>
+						 </div>
 						 <div class="col-sm-12"><h4>Lediga pass</h4></div>
 				 	</div>
 				 </div>
