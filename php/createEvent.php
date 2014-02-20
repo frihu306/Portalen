@@ -36,6 +36,18 @@ function loadTypes()
 		<?php
 	}
 }
+
+function loadTemplates()
+{
+	$templates = DBQuery::sql("SELECT id, name FROM event_template");
+	for($i = 0; $i < count($templates); ++$i)
+	{
+		?>
+			<option value="<?php echo $templates[$i]['id']; ?>"><?php echo $templates[$i]['name']; ?></option>
+		<?php
+	}
+}
+
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
@@ -49,12 +61,23 @@ function loadTypes()
 	});
 </script>
 <script>
+
+Date.prototype.yyyymmdd = function() {         
+                                
+        var yyyy = this.getFullYear().toString();                                    
+        var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based         
+        var dd  = this.getDate().toString();             
+                            
+        return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
+   };  
+
+
 function getTemplate(id)
 {
 	if(window.XMLHttpRequest)
-		{// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		}
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	}
 	else
 	{// code for IE6, IE5
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
@@ -64,22 +87,30 @@ function getTemplate(id)
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
 		{
 			var jsonObj = JSON.parse(xmlhttp.responseText);
+			var date = new Date();
 			document.getElementById("type" + jsonObj.type).selected = "selected";
-			document.getElementById("start").value = jsonObj.start;
-			document.getElementById("end").value = jsonObj.end;
+			document.getElementById("start").value = date.yyyymmdd() + " " + jsonObj.start;
+			
+			var endDate = new Date();
+			if(jsonObj.end < jsonObj.start)
+			{
+				endDate.setDate(date.getDate() + 1);
+			}
+			
+			document.getElementById("end").value = endDate.yyyymmdd() + " " + jsonObj.end;
 		}
 	}
 	xmlhttp.open("GET","askTemplate.php?template_id="+id, true);
 	xmlhttp.send();
 }
+
 </script>
 <form action="" method="post">
 	<p><input type="text" placeholder="Namn" name="name"/></p>
 	<p>
 		<select name="template" onchange="getTemplate(this.value)">
 			<option value="no">Ingen mall</option>
-			<option value="1">Onsdagspub</option>
-			<option value="2">Nattklubb</option>
+			<?php loadTemplates(); ?>
 		</select>
 	</p>
 	<p>
@@ -88,7 +119,7 @@ function getTemplate(id)
 			<?php loadTypes(); ?>
 		</select>
 	</p>
-	<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start"/></p>
-	<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end"/></p>
+	<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $date; ?>"/></p>
+	<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $date; ?>"/></p>
 	<p><input type="submit" name="submit" value="Skapa event"/></p>
 </form>
