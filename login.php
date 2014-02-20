@@ -57,7 +57,6 @@ if(isset($_POST['log_in']))
         background-color: #f5f5f5;
         padding: 20px;
         margin: 0 -10px;
-		border-top: 8px solid #f99929;
       }
 
 	  .login-form {
@@ -133,11 +132,17 @@ border-left: 0px solid;
 -webkit-user-select: text;
 cursor: auto;
 }
+
+.logo {
+		width: 290;
+		max-height: 20;
+		overflow: hidden;
+	} 
     </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
-<body>
+<body><center><a href="/" class="logo"><img src="img/border.png"></a></center>
   <div class="container">
 			<div class="content">
 			  <div class="row"><center>
