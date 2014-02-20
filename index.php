@@ -1,11 +1,11 @@
 <?php
-	session_start();
-	if(!isset($_SESSION['user_id']))
-	{
-		header('Location: login.php');
-	}
-	
-	include_once('php/general.php');
+session_start();
+if(!isset($_SESSION['user_id']))
+{
+	header('Location: login.php');
+}
+
+include_once('php/general.php');
 ?>
 <!DOCTYPE html>
 <html>

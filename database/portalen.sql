@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 19, 2014 at 12:12 AM
+-- Generation Time: Feb 20, 2014 at 02:09 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   PRIMARY KEY (`id`),
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `event`
@@ -46,7 +46,52 @@ INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`, `event
 (1, 'Pizzaonsdag', '2014-02-19 18:00:00', '2014-02-19 22:00:00', 1, 1),
 (2, 'Vårkravallen', '2014-03-08 22:00:00', '2014-03-09 03:00:00', 2, 2),
 (4, 'Sittning', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1, 3),
-(5, 'Personalfest', '2014-03-09 18:30:00', '2014-03-10 03:00:00', 2, 4);
+(5, 'Personalfest', '2014-03-09 18:30:00', '2014-03-10 03:00:00', 2, 4),
+(7, 'MT <3 GDK', '2014-02-22 18:00:00', '2014-02-22 22:00:00', 1, 3),
+(8, 'Torsdagsklubben', '2014-02-20 22:00:00', '2014-02-21 03:00:00', 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_template`
+--
+
+CREATE TABLE IF NOT EXISTS `event_template` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `event_type_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `event_type_id` (`event_type_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `event_template`
+--
+
+INSERT INTO `event_template` (`id`, `name`, `start_time`, `end_time`, `event_type_id`) VALUES
+(5, 'Onsdagspub', '18:00:00', '22:00:00', 1),
+(6, 'Vanlig nattklubb', '22:00:00', '03:00:00', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_template_group`
+--
+
+CREATE TABLE IF NOT EXISTS `event_template_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  `points` int(11) NOT NULL,
+  `event_template_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `event_template_id` (`event_template_id`),
+  KEY `group_id` (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -153,20 +198,23 @@ CREATE TABLE IF NOT EXISTS `user` (
   `zip` varchar(5) DEFAULT NULL,
   `city` varchar(50) DEFAULT NULL,
   `avatar` varchar(200) DEFAULT NULL,
-  `date_created` date NOT NULL DEFAULT '0000-00-00',
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `bank_account` varchar(50) DEFAULT NULL,
   `special_food` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`user_name`,`mail`,`ssn`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `address`, `zip`, `city`, `avatar`, `date_created`, `bank_account`, `special_food`) VALUES
-(1, 'Valross', 'valross@mail.com', '1111111234', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', NULL, NULL, NULL, NULL, NULL, '0000-00-00', NULL, NULL),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, NULL, NULL, NULL, NULL, '0000-00-00', NULL, NULL);
+(1, 'Valross', 'valross@mail.com', '1111111234', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+(3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+(5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', NULL, NULL),
+(6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -187,9 +235,9 @@ CREATE TABLE IF NOT EXISTS `user_work` (
 --
 
 INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
-(4, 1, 0),
+(4, 1, 1),
 (5, 1, 1),
-(6, 2, 0),
+(6, 2, 1),
 (7, 1, 0);
 
 -- --------------------------------------------------------
@@ -229,22 +277,35 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
-  ADD CONSTRAINT `event_ibfk_2` FOREIGN KEY (`event_type_id`) REFERENCES `event_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`period_id`) REFERENCES `period` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`period_id`) REFERENCES `period` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `event_ibfk_2` FOREIGN KEY (`event_type_id`) REFERENCES `event_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `event_template`
+--
+ALTER TABLE `event_template`
+  ADD CONSTRAINT `event_template_ibfk_1` FOREIGN KEY (`event_type_id`) REFERENCES `event_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `event_template_group`
+--
+ALTER TABLE `event_template_group`
+  ADD CONSTRAINT `event_template_group_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `event_template_group_ibfk_1` FOREIGN KEY (`event_template_id`) REFERENCES `event_template` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `group_member`
 --
 ALTER TABLE `group_member`
-  ADD CONSTRAINT `group_member_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `group_member_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `group_member_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `group_member_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_work`
 --
 ALTER TABLE `user_work`
-  ADD CONSTRAINT `user_work_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_work_ibfk_1` FOREIGN KEY (`work_slot_id`) REFERENCES `work_slot` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_work_ibfk_1` FOREIGN KEY (`work_slot_id`) REFERENCES `work_slot` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_work_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `work_slot`
