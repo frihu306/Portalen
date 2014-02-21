@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2014 at 02:02 PM
+-- Generation Time: Feb 21, 2014 at 05:46 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   UNIQUE KEY `name` (`name`),
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `event`
@@ -48,9 +48,7 @@ INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`, `event
 (2, 'Vårkravallen', '2014-03-08 22:00:00', '2014-03-09 03:00:00', 2, 2),
 (4, 'Sittning', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1, 3),
 (5, 'Personalfest', '2014-03-09 18:30:00', '2014-03-10 03:00:00', 2, 4),
-(7, 'MT <3 GDK', '2014-02-22 18:00:00', '2014-02-22 22:00:00', 1, 3),
-(8, 'Torsdagsklubben', '2014-02-20 22:00:00', '2014-02-21 03:00:00', 1, 2),
-(9, 'Den fina sittningen', '2014-02-26 18:00:00', '2014-02-26 22:00:00', 1, 3);
+(7, 'MT <3 GDK', '2014-02-22 18:00:00', '2014-02-22 22:00:00', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -235,15 +233,24 @@ CREATE TABLE IF NOT EXISTS `work_group` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `name_2` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `work_group`
 --
 
 INSERT INTO `work_group` (`id`, `name`) VALUES
+(13, 'Alla'),
 (4, 'Bar'),
+(7, 'Dagsansvarig'),
+(5, 'DJ'),
+(8, 'Event'),
+(12, 'Hovmästare'),
 (3, 'Kock'),
+(10, 'Ljud & Ljus'),
+(9, 'Marknadsföring'),
+(11, 'Servering'),
+(6, 'Värd'),
 (2, 'Webb');
 
 -- --------------------------------------------------------
@@ -262,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -273,7 +280,9 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `
 (5, 2, 4, 4, '2014-02-14 16:00:00', '2014-02-15 00:00:00'),
 (6, 2, 1, 3, '2014-02-19 17:00:00', '2014-02-19 23:00:00'),
 (7, 2, 2, 6, '2014-03-08 19:00:00', '2014-03-09 05:00:00'),
-(8, 2, 2, 6, '2014-03-08 19:00:00', '2014-03-09 05:00:00');
+(8, 2, 2, 6, '2014-03-08 19:00:00', '2014-03-09 05:00:00'),
+(9, 6, 5, 0, '2014-03-09 18:00:00', '2014-03-10 03:00:00'),
+(10, 10, 5, 0, '2014-03-09 18:00:00', '2014-02-10 03:00:00');
 
 --
 -- Constraints for dumped tables
@@ -296,8 +305,8 @@ ALTER TABLE `event_template`
 -- Constraints for table `event_template_group`
 --
 ALTER TABLE `event_template_group`
-  ADD CONSTRAINT `event_template_group_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `event_template_group_ibfk_1` FOREIGN KEY (`event_template_id`) REFERENCES `event_template` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `event_template_group_ibfk_1` FOREIGN KEY (`event_template_id`) REFERENCES `event_template` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `event_template_group_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `group_member`
