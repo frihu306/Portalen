@@ -111,7 +111,7 @@ h4, h5, h6 {
 	  margin-top: 14px;
 	  margin-right: 20px;
 	  margin-bottom: 13px;
-	  background-color: #111;
+	  background-color: #21201e;
 	  border: 0;
 	  border-radius: 5px;
 	}
@@ -128,9 +128,12 @@ h4, h5, h6 {
 /* =Content
 -------------------------------------------------------------- */
 	
-	#content .top-div {
+	
+	/* Box containing the search form and user info */
+	
+	#content .top-div { /* Divides the search form and user info from the rest of the #content div */
 		margin: 10px 0 20px 0;
-		border-bottom: 1px solid #ddd;
+		border-bottom: 1px solid #dddddd;
 	}
 	
 	#content .user-info {
@@ -154,16 +157,44 @@ h4, h5, h6 {
 		font-size: 16px;
 		margin: 7px 15px 0 15px;
 	}
+	
+	
+	/* Upcoming events (startpage) */
+	
 	#content .upcoming-event {
 		padding: 15px;
 		background: #f99929;
 		color: #fff;
 	}
-
 	#content .upcoming-event-info {
 		background: #fff;
 		border-bottom: 1px solid #ddd;
 		border-right: 1px solid #ddd;
 		border-left: 1px solid #ddd;
 		padding: 15px 15px 5px 15px;
+	}
+	
+	/* Måste kategoriseras ordentligt, men jag är för dålig */
+	
+	.badge {
+		padding: 5px 8px;
+		background: #6492de;
+		font-weight: 400;
+		font-size: 11px;
+	}
+	
+	.list-group-item-date-floated-left {
+		float: left; 
+		width: 44px;
+	}
+	
+	.list-group-item:first-child {
+	  border-top-right-radius: 0px;
+	  border-top-left-radius: 0px;
+	}
+
+	.list-group-item:last-child {
+	  margin-bottom: 0;
+	  border-bottom-right-radius: 0px;
+	  border-bottom-left-radius: 0px;
 	}

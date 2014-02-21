@@ -66,7 +66,7 @@ include_once('php/general.php');
 		          </div>
 				  
 				  
-		          <div class="navbar-collapse collapse" style="border: 1px solid #f00;">
+		          <div class="navbar-collapse collapse">
 		            <ul class="main-nav">
 		              <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span>Hem</a></li>
 		              <li class="dropdown">
@@ -122,10 +122,24 @@ include_once('php/general.php');
    		 	 <div class="row">
 				 <div class="col-sm-5">
 					 <div class="row">
-						 <div class="col-sm-12"><h4>Dina bokade pass</h4>
+						 <div class="col-sm-12"><h3>Dina bokade pass</h3>
 							<?php loadBookedEvents(); ?>
+							
+							<div class="list-group">
+							  <a href="#" class="list-group-item"><span class="badge">4 lediga platser</span><strong class="list-group-item-date-floated-left">27/2</strong> Webblagsmöte</a>
+							</div>
+							
 						 </div>
-						 <div class="col-sm-12"><h4>Lediga pass</h4></div>
+						 <div class="col-sm-12"><h3>Lediga pass</h3>
+						 
+							 <div class="list-group">
+							   <a href="#" class="list-group-item"><span class="badge">8 lediga platser</span><strong class="list-group-item-date-floated-left">27/2</strong> Kravallpub</a>
+							   <a href="#" class="list-group-item"><span class="badge">48 lediga platser</span><strong class="list-group-item-date-floated-left">9/3</strong> Personalfest!</a>
+							   <a href="#" class="list-group-item"><span class="badge">4 lediga platser</span><strong class="list-group-item-date-floated-left">6/3</strong> Webblagsmöte</a>
+							   <a href="#" class="list-group-item"><span class="badge">13 lediga platser</span><strong class="list-group-item-date-floated-left">13/3</strong> St Patricks Day</a>
+							 </div>
+							 
+						 </div>
 				 	</div>
 				 </div>
 				 <div class="col-sm-7">
