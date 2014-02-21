@@ -15,6 +15,7 @@ include_once('php/general.php');
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
 
@@ -40,11 +41,11 @@ include_once('php/general.php');
 					  <div class="progress">
 					    <div class="progress-bar worked" style="width: <?php echo $workedPointsPercent ?>%">
 						<!--<p> 3p </p>
-					      <span class="sr-only">3 arbetade poÃƒÂ¤ng</span>-->
+					      <span class="sr-only">3 arbetade poÃ¤ng</span>-->
 					    </div>
 					    <div class="progress-bar booked" style="width: <?php echo $bookedPointsPercent ?>%">
 						<!--<p> 3p </p>
-					      <span class="sr-only">3 bokade poÃƒÂ¤ng</span> -->
+					      <span class="sr-only">3 bokade poÃ¤ng</span> -->
 					    </div>
 					  </div> <!-- .progress -->
 					  
@@ -66,7 +67,7 @@ include_once('php/general.php');
 		          </div>
 				  
 				  
-		          <div class="navbar-collapse collapse" style="border: 1px solid #f00;">
+		          <div class="navbar-collapse collapse">
 		            <ul class="main-nav">
 		              <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span>Hem</a></li>
 		              <li class="dropdown">
@@ -75,7 +76,7 @@ include_once('php/general.php');
 		                  <li><a href="#">Arbetade pass</a></li>
 		                  <li><a href="#">Meddelanden</a></li>
 		                  <li class="divider"></li>
-		                  <li class="dropdown-header">InstÃ¤llningar</li>
+		                  <li class="dropdown-header">Inställningar</li>
 		                  <li><a href="#">Redigera profil</a></li>
 		                  <li><a href="#">Avsluta medlemskap</a></li>
 		                </ul>
@@ -108,34 +109,56 @@ include_once('php/general.php');
 				  </div>
 		 	 </div> 
 			 <div class="top-div"></div>
-   		 	 <div class="row">
-				 <div class="col-sm-12">
+   		 	 <!--<div class="row">
+				 
+				 KOMMANDE PASS = ONÖDIGT?
+					 
+					 <div class="col-sm-12">
 				 	<h4 style="font-weight: 200;">Kommande pass</h4>
 					<?php
 						loadUpcomingEvents($date);
 					?>
 			 	 </div>
-   		 	 </div>
+   		 	 </div> -->
    		 	 <div class="row">
 				 <div class="col-sm-5">
 					 <div class="row">
-						 <div class="col-sm-12"><h4>Dina bokade pass</h4>
+						 <div class="col-sm-12"><h3>Dina bokade pass</h3>
 							<?php loadBookedEvents(); ?>
+							
+							<div class="list-group">
+							  <a href="#" class="list-group-item"><span class="badge">4 lediga platser</span><strong class="list-group-item-date-floated-left">27/2</strong> Webblagsmöte</a>
+							</div>
+							
 						 </div>
-						 <div class="col-sm-12"><h4>Lediga pass</h4></div>
+						 <div class="col-sm-12"><h3>Lediga pass</h3>
+						 
+							 <div class="list-group">
+							   <a href="#" class="list-group-item"><span class="badge">8 lediga platser</span><strong class="list-group-item-date-floated-left">27/2</strong> Kravallpub</a>
+							   <a href="#" class="list-group-item"><span class="badge">48 lediga platser</span><strong class="list-group-item-date-floated-left">9/3</strong> Personalfest!</a>
+							   <a href="#" class="list-group-item"><span class="badge">4 lediga platser</span><strong class="list-group-item-date-floated-left">6/3</strong> Webblagsmöte</a>
+							   <a href="#" class="list-group-item"><span class="badge">13 lediga platser</span><strong class="list-group-item-date-floated-left">13/3</strong> St Patricks Day</a>
+							 </div>
+							 
+						 </div>
 				 	</div>
 				 </div>
-				 <div class="col-sm-7"><h1 class="thin-100">Ny termin och nya arbetspass!</h1>
+				 <div class="col-sm-7">
+					 <h1>En helgrym H1-rubrik. Light 36px</h1>
 
-					 <p>Hej! Terminen har dragit igÃ¥ng och det finns nÃ¥gra pass kvar i januari att fylla. FramfÃ¶rallt pÃ¥ Vinterkravallen och Nollefesten, dÃ¤r behÃ¶ver vi dessutom allapass som vem som helst kan jobba som! Annars finns det nu pass fÃ¶r februari, och som vanligt gÃ¤ller det att jobba 8 poÃ¤ng eller motsvarande fÃ¶r att fÃ¥ personalfÃ¶rmÃ¥ner. NÃ¤sta personalfest Ã¤r i mars, sÃ¥ fÃ¶r att fÃ¥ gÃ¥ pÃ¥ den mÃ¥ste man ha jobbat sina poÃ¤ng i bÃ¥de dec/jan och februari! Alternativt vara nybyggare och aldrig ha gÃ¥tt pÃ¥ en personalfest innan.
+					 <p>Hej! Terminen har dragit igång och det finns några pass kvar i januari att fylla. Framförallt på Vinterkravallen och Nollefesten, där behöver vi dessutom allapass som vem som helst kan jobba som! Annars finns det nu pass för februari, och som vanligt gäller det att jobba 8 poäng eller motsvarande för att få personalförmåner. 
+						 
+<h2>En H2-rubrik som är smal. Light 30px</h2>
+Ny termin betyder också ny personal, onsdagen den 5/2 kl 18 kommer vi ha infokväll på Trappan! Så om ni känner någon som är sugen på att börja men vill ha mer information om lagen och Trappan - tipsa dem om infokvällen!
 
-Ny termin betyder ocksÃ¥ ny personal, onsdagen den 5/2 kl 18 kommer vi ha infokvÃ¤ll pÃ¥ Trappan! SÃ¥ om ni kÃ¤nner nÃ¥gon som Ã¤r sugen pÃ¥ att bÃ¶rja men vill ha mer information om lagen och Trappan - tipsa dem om infokvÃ¤llen!
+<h3>Sen har vi H3 också. Light 24px</h3>
+<h4>Och en H4. Bold 18px</h4>
+Dagen innan infokvällen, alltså tisdagen 4/2, vill vi istället hylla er som redan jobbar på Trappan genom att ha personalpub! Denna gång är det marknadsföringslaget och barlaget som ska anordna, mer information kommer inom kort.Hej! Terminen har dragit igång och det finns några pass kvar i januari att fylla. Framförallt på Vinterkravallen och Nollefesten, där behöver vi dessutom allapass som vem som helst kan jobba som! Annars finns det nu pass för februari, och som vanligt gäller det att jobba 8 poäng eller motsvarande för att få personalförmåner. Nästa personalfest är i mars, så för att få gå på den måste man ha jobbat sina poäng i både dec/jan och februari! Alternativt vara nybyggare och aldrig ha gått på en personalfest innan.
+<h5>En H5-rubrik kommer här. Bold 14px</h5>
+<h6>En H6-rubrik kommer här. Bold 12px</h6>
+Ny termin betyder också ny personal, onsdagen den 5/2 kl 18 kommer vi ha infokväll på Trappan! Så om ni känner någon som är sugen på att börja men vill ha mer information om lagen och Trappan - tipsa dem om infokvällen!
 
-Dagen innan infokvÃ¤llen, alltsÃ¥ tisdagen 4/2, vill vi istÃ¤llet hylla er som redan jobbar pÃ¥ Trappan genom att ha personalpub! Denna gÃ¥ng Ã¤r det marknadsfÃ¶ringslaget och barlaget som ska anordna, mer information kommer inom kort.Hej! Terminen har dragit igÃ¥ng och det finns nÃ¥gra pass kvar i januari att fylla. FramfÃ¶rallt pÃ¥ Vinterkravallen och Nollefesten, dÃ¤r behÃ¶ver vi dessutom allapass som vem som helst kan jobba som! Annars finns det nu pass fÃ¶r februari, och som vanligt gÃ¤ller det att jobba 8 poÃ¤ng eller motsvarande fÃ¶r att fÃ¥ personalfÃ¶rmÃ¥ner. NÃ¤sta personalfest Ã¤r i mars, sÃ¥ fÃ¶r att fÃ¥ gÃ¥ pÃ¥ den mÃ¥ste man ha jobbat sina poÃ¤ng i bÃ¥de dec/jan och februari! Alternativt vara nybyggare och aldrig ha gÃ¥tt pÃ¥ en personalfest innan.
-
-Ny termin betyder ocksÃ¥ ny personal, onsdagen den 5/2 kl 18 kommer vi ha infokvÃ¤ll pÃ¥ Trappan! SÃ¥ om ni kÃ¤nner nÃ¥gon som Ã¤r sugen pÃ¥ att bÃ¶rja men vill ha mer information om lagen och Trappan - tipsa dem om infokvÃ¤llen!
-
-Dagen innan infokvÃ¤llen, alltsÃ¥ tisdagen 4/2, vill vi istÃ¤llet hylla er som redan jobbar pÃ¥ Trappan genom att ha personalpub! Denna gÃ¥ng Ã¤r det marknadsfÃ¶ringslaget och barlaget som ska anordna, mer information kommer inom kort</p></div>
+Dagen innan infokvällen, alltså tisdagen 4/2, vill vi istället hylla er som redan jobbar på Trappan genom att ha personalpub! Denna gång är det marknadsföringslaget och barlaget som ska anordna, mer information kommer inom kort</p></div>
    		 	 </div>
 			 
    	 	</div> <!-- end #content -->
