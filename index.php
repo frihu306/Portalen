@@ -99,8 +99,12 @@ include_once('php/general.php');
 
 		  <div id="content">
 			  <div class="row">
-				  <div class="col-sm-12">
-					  <span class="glyphicon glyphicon-search"></span>
+				  <div class="col-sm-4 search">
+					  <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></button>
+				  		<input type="search" class="form-control" placeholder="Sök på portalen...">
+				  </div> <!-- col-sm-4 -->
+					  
+				  	<div class="col-sm-8">
 					  <div class="user-info">
 						  <img src="profile.jpg" width="32px" height="32px">
 						  <a href="http://google.se" class="username"><span style="font-weight: normal">Inloggad som</span> <?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></a>
