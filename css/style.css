@@ -14,9 +14,11 @@
 */
 
 
-
 /* =Sidebar
 -------------------------------------------------------------- */
+
+
+/* Logotype */
 
 	#sidebar {
 		background: #363430;
@@ -26,6 +28,8 @@
 		overflow: hidden;
 		background: #f99929;
 	} 
+	
+	
 	#sidebar .your-period {
 		padding: 20px;
 		background: #ec8712;
@@ -49,7 +53,7 @@
 	#sidebar .your-period .booked {
 		background: #ffb258;
 	}
-
+	
 	
 /* =Sidebar navigation
 -------------------------------------------------------------- */
@@ -81,12 +85,29 @@
 		padding-top: 2px;
 	}
 	
+	/* Responsive Bootstrap navigation */
+	
+	.navbar-toggle {
+	  padding: 10px 10px;
+	  margin-top: 14px;
+	  margin-right: 20px;
+	  margin-bottom: 13px;
+	  background-color: #111;
+	  border: 0;
+	  border-radius: 5px;
+	}
+	.navbar-toggle .icon-bar {
+	  width: 24px;
+	  height: 3px;
+	}
+	#sidebar .icon-bar {
+ 	   	background-color: #fff;
+	}
+	
+	
+	
 /* =Content
 -------------------------------------------------------------- */
-	
-	#content {
-		padding: 10px 30px 30px 30px;
-	}
 	
 	#content .top-div {
 		margin: 10px 0 20px 0;

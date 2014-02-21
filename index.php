@@ -66,7 +66,7 @@ include_once('php/general.php');
 		          </div>
 				  
 				  
-		          <div class="navbar-collapse collapse">
+		          <div class="navbar-collapse collapse" style="border: 1px solid #f00;">
 		            <ul class="main-nav">
 		              <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span>Hem</a></li>
 		              <li class="dropdown">

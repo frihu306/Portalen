@@ -43,7 +43,7 @@ if(isset($_POST['log_in']))
     <style type="text/css">
       /* Override some defaults */
       html, body {
-        background-color: #363430;
+        background-color: #cf7000;
       }
       body {
         padding-top: 40px; 
@@ -138,6 +138,15 @@ cursor: auto;
 		max-height: 20;
 		overflow: hidden;
 	} 
+	
+.info {
+
+	margin-top: 30px;
+	text-align: center;
+	margin-bottom: -20px;
+	font-size: 10px;
+
+}
     </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -158,6 +167,7 @@ cursor: auto;
 					  <button class="btn primary" type="submit" name="log_in">Logga in</button>
 					</fieldset>
 				  </form></center>
+				  		<div class="info"><p>Du måste vara reggad. Lös problemet. Kontakta Hampyyz.</p></div>
 				</div>
 			 </div>
 	</div>
