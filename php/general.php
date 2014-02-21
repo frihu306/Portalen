@@ -65,16 +65,21 @@ function loadUpcomingEvents($date)
 										");
 		$workSlotsCount = count($workSlots);
 		$availableSlotsCount = count($availableSlots);
+		$availableSlotsText = 'lediga platser';
+		if($availableSlotsCount == 1)
+		{
+			$availableSlotsText = 'ledig plats';
+		}
 		
 		$name = $upcomingEvents[$i]['event_name'];
 		$date = new DateTime($upcomingEvents[$i]['start_time']);
 		$day = $date->format('j');
-		$month = $date->format('m');
+		$month = $date->format('n');
 		$start = $date->format('H:i');
 		$end = new DateTime($upcomingEvents[$i]['end_time']);
 		$end = $end->format('H:i');
 		$type = $upcomingEvents[$i]['type_name'];
-		switch($month)
+		/*switch($month)
 		{
 		case '01':
 			$month = 'januari';
@@ -114,17 +119,9 @@ function loadUpcomingEvents($date)
 			break;
 		default:
 			break;
-		}
+		}*/
 		?>
-		<div class="col-sm-4">
-				 <div class="upcoming-event">
-					 <strong><?php echo $name; ?></strong><br /> <?php echo $day ?>:e <?php echo $month ?> <?php echo $start.'-'.$end; ?>
-				 </div>
-				 <div class="upcoming-event-info" style="overflow: hidden;">
-					 <small><p style="float: left;">Lediga pass <br /><strong><?php echo $availableSlotsCount; ?>/<?php echo $workSlotsCount; ?></strong></p>
-					 <p style="float: right">Arrangemangstyp <br /><strong><?php echo $type ?></strong></p></small>
-				 </div>
-			 </div>
+			<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
 		<?php
 	}
 }
@@ -171,7 +168,7 @@ function loadBookedEvents()
 		?>
 		
 		<p>
-			<?php echo $start.'-'.$end.' '.$name.' '.$points.'p'; ?>
+			<!--<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>-->
 		</p>
 		
 		<?php
