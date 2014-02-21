@@ -72,6 +72,9 @@ function loadGroups()
 </script>
 <script>
 
+//Global variables
+var countSlots = 0;
+
 Date.prototype.yyyymmdd = function() {         
                                 
         var yyyy = this.getFullYear().toString();                                    
@@ -120,8 +123,14 @@ function addGroup()
 	var amount = $("#group_amount").val();
 	for(var i = 0; i < amount; ++i)
 	{
-		$("#added_groups").append("<p>"+ group +"</p>");
+		$("#added_groups").append("<p id='slot" + countSlots + "'>"+ "<input type='button' value='X' onclick='removeSlot(" + countSlots + ")'/>" +  group +"</p>");
+		++countSlots;
 	}
+}
+
+function removeSlot(id)
+{
+	$("#slot" + id).remove();
 }
 
 </script>
