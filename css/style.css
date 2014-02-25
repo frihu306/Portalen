@@ -21,6 +21,13 @@ a {
 	color: #6492de;
 }
 
+.avatar-16x16 {
+	
+}
+.avatar-32x32 {
+	border-radius: 22px;
+}
+
 /* =Typography
 -------------------------------------------------------------- */
 
@@ -152,9 +159,6 @@ a {
 			float: left;
 			color: #333;
 		}
-		#content .user-info img {
-			border-radius: 22px;
-		}
 		#content .user-info a.username {
 			font-weight: bold;
 			margin: 6px 5px 0 10px;
@@ -246,7 +250,12 @@ a {
 		margin-top: 30px;
 		padding-top: 10px;
 		border-top: 1px solid #dddddd;
-		text-align: center;
+	}
+	#footer p {
 		font-size: 12px;
+	}
+	#footer a.scroll-to-top {
+		color: #333;
+		font-size: 28px;
 	}
 	
