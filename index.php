@@ -100,13 +100,13 @@ include_once('php/general.php');
 		  <div id="content">
 			  <div class="row">
 				  <div class="col-sm-4 search">
-					  <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></button>
+					  <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
 				  		<input type="search" class="form-control" placeholder="Sök på portalen...">
 				  </div> <!-- col-sm-4 -->
 					  
 				  	<div class="col-sm-8">
 					  <div class="user-info">
-						  <img src="profile.jpg" width="32px" height="32px">
+						  <img src="profile.jpg" class="avatar-32x32" width="32px" height="32px">
 						  <a href="http://google.se" class="username"><span style="font-weight: normal">Inloggad som</span> <?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></a>
 					  	<a href="login.php" class="sign-out"><span class="glyphicon glyphicon-off"></span></a>
 					  </div>
@@ -143,7 +143,7 @@ include_once('php/general.php');
 				 </div>
 				 <div class="col-sm-7">
 					 <h1>En helgrym H1-rubrik. Light 36px</h1>
-					 <small>[avatar 16x16] Skrivet av <a href="#">Astrid Adelsköld</a> den 24 februari 2014 kl. 14:45</small>
+					 <img src="profile.jpg" class="avatar-16x16" width="16px" height="16px"><small>Skrivet av <a href="#">Astrid Adelsköld</a> den 24 februari 2014 kl. 14:45</small>
 					 <p>Hej! Terminen har dragit igång och det finns några pass kvar i januari att fylla. Framförallt på Vinterkravallen och Nollefesten, där behöver vi dessutom allapass som vem som helst kan jobba som! Annars finns det nu pass för februari, och som vanligt gäller det att jobba 8 poäng eller motsvarande för att få personalförmåner. 
 						 
 <h2>En H2-rubrik som är smal. Light 30px</h2>
@@ -160,9 +160,14 @@ Dagen innan infokvällen, alltså tisdagen 4/2, vill vi istället hylla er som r
    		 	 </div>
 			 
 		  <div class="row">
-			  <div id="footer" class="col-sm-12">
-				  <p>Trappans Personalportal. Kontakta Trappans <a href="#">webbansvarig</a> vid problem eller frågor. <a href="#">Om portalen</a>. Portalen använder sig av <a href="http://glyphicons.com/" target="_blank">Glyphicons</a>.
+			  <div id="footer">
+			  <div class="col-sm-10">
+				  <p>Trappans Personalportal 2014. <a href="#">Om portalen</a>. <br />Kontakta Trappans <a href="#">webbansvarig</a> vid problem eller frågor. Portalen använder sig av <a href="http://glyphicons.com/" target="_blank">Glyphicons</a>.
 			  </div>
+			  <div class="col-sm-2 text-right">
+				  <a href="#top" class="scroll-to-top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+			  </div>
+		 	  </div> <!-- #footer -->
 		  </div>
 			 
    	 	</div> <!-- end #content -->
