@@ -106,7 +106,7 @@ include_once('php/general.php');
 					  
 				  	<div class="col-sm-8">
 					  <div class="user-info">
-						  <img src="profile.jpg" class="avatar-32x32" width="32px" height="32px">
+						  <img src="<?php echo loadAvatar(); ?>" class="avatar-32x32" width="32px" height="32px">
 						  <a href="http://google.se" class="username"><span style="font-weight: normal">Inloggad som</span> <?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></a>
 					  	<a href="login.php" class="sign-out"><span class="glyphicon glyphicon-off"></span></a>
 					  </div>

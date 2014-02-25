@@ -284,4 +284,15 @@ function loadAvailableEvents()
 		<?php
 	}
 }
+//
+//Load avatar
+function loadAvatar()
+{
+	$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$_SESSION[user_id]' AND avatar IS NOT NULL");
+	if(count($results) == 0)
+	{
+		return 'img/avatars/no-photo.jpg';
+	}
+	return 'img/avatars/'.$results[0]['avatar'];
+}
 ?>
