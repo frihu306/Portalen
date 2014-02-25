@@ -119,7 +119,7 @@ include_once('php/general.php');
 					 <div class="row">
 						 <div class="col-sm-12"><h3>Dina bokade pass</h3>
 							
-							 <p><i>Du har inte några bokade pass just nu.</i></p>
+							 
 							
 							<div class="list-group">
 							  <?php loadBookedEvents(); ?>
@@ -127,16 +127,15 @@ include_once('php/general.php');
 							
 						<h3>Idag på Trappan</h3>
 							<div class="list-group">	
-							(Note: bytte tbx "kommande pass" till "idag på trappan".)
 							<?php
-								loadUpcomingEvents($date);
+								loadTodaysEvents();
 							?>
 							</div>
 						
 						 <h3>Lediga pass</h3>
 						 
 							 <div class="list-group">
-								<?php loadUpcomingEvents($date) ?>
+								<?php loadAvailableEvents() ?>
 							 </div>
 							 
 						 </div>
