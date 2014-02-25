@@ -113,29 +113,27 @@ include_once('php/general.php');
 				  </div>
 		 	 </div> 
 			 <div class="top-div"></div>
-   		 	 <!--<div class="row">
-				 
-				 KOMMANDE PASS = ONÖDIGT?
-					 
-					 <div class="col-sm-12">
-				 	<h4 style="font-weight: 200;">Kommande pass</h4>
-					<?php
-						loadUpcomingEvents($date);
-					?>
-			 	 </div>
-   		 	 </div> -->
+   		 	 
    		 	 <div class="row">
 				 <div class="col-sm-5">
 					 <div class="row">
 						 <div class="col-sm-12"><h3>Dina bokade pass</h3>
 							
+							 <p><i>Du har inte några bokade pass just nu.</i></p>
 							
 							<div class="list-group">
 							  <?php loadBookedEvents(); ?>
 							</div>
 							
-						 </div>
-						 <div class="col-sm-12"><h3>Lediga pass</h3>
+						<h3>Idag på Trappan</h3>
+							<div class="list-group">	
+							(Note: bytte tbx "kommande pass" till "idag på trappan".)
+							<?php
+								loadUpcomingEvents($date);
+							?>
+							</div>
+						
+						 <h3>Lediga pass</h3>
 						 
 							 <div class="list-group">
 								<?php loadUpcomingEvents($date) ?>
@@ -146,7 +144,7 @@ include_once('php/general.php');
 				 </div>
 				 <div class="col-sm-7">
 					 <h1>En helgrym H1-rubrik. Light 36px</h1>
-
+					 <small>[avatar 16x16] Skrivet av <a href="#">Astrid Adelsköld</a> den 24 februari 2014 kl. 14:45</small>
 					 <p>Hej! Terminen har dragit igång och det finns några pass kvar i januari att fylla. Framförallt på Vinterkravallen och Nollefesten, där behöver vi dessutom allapass som vem som helst kan jobba som! Annars finns det nu pass för februari, och som vanligt gäller det att jobba 8 poäng eller motsvarande för att få personalförmåner. 
 						 
 <h2>En H2-rubrik som är smal. Light 30px</h2>
@@ -162,11 +160,15 @@ Ny termin betyder också ny personal, onsdagen den 5/2 kl 18 kommer vi ha infokv
 Dagen innan infokvällen, alltså tisdagen 4/2, vill vi istället hylla er som redan jobbar på Trappan genom att ha personalpub! Denna gång är det marknadsföringslaget och barlaget som ska anordna, mer information kommer inom kort</p></div>
    		 	 </div>
 			 
+		  <div class="row">
+			  <div id="footer" class="col-sm-12">
+				  <p>Trappans Personalportal. Kontakta Trappans <a href="#">webbansvarig</a> vid problem eller frågor. <a href="#">Om portalen</a>. Portalen använder sig av <a href="http://glyphicons.com/" target="_blank">Glyphicons</a>.
+			  </div>
+		  </div>
+			 
    	 	</div> <!-- end #content -->
 	</div> <!-- #page-container -->
 	
-	
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
