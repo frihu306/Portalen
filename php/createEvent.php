@@ -120,10 +120,18 @@ function getTemplate(id)
 function addGroup()
 {
 	var group = $("#group option:selected").text();
+	var start = $("#slot_start").val();
+	var end = $("#slot_end").val();
+	var points = $("#slot_points").val();
 	var amount = $("#group_amount").val();
 	for(var i = 0; i < amount; ++i)
 	{
-		$("#added_groups").append("<p id='slot" + countSlots + "'>"+ "<input type='button' value='X' onclick='removeSlot(" + countSlots + ")'/>" +  group +"</p>");
+		$("#added_groups").append("<p id='slot" + countSlots + "'>"
+		+ "<input type='text' value='" + group + "' name='slotGroups[]' style='border:0px;' size='11' readonly />"
+		+ "<input class='datepicker' type='text' value='" + start + "' name='slotStarts[]' />"
+		+ "<input class='datepicker' type='text' value='" + end + "' name='slotEnds[]' />"
+		+ "<input type='number' value='" + points + "' name='slotPoints[]' style='width:40px;' />"
+		+ "<button type='button' onclick='removeSlot(" + countSlots + ")'>X</button></p>");
 		++countSlots;
 	}
 }
@@ -150,14 +158,18 @@ function removeSlot(id)
 	</p>
 	<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $date; ?>"/></p>
 	<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $date; ?>"/></p>
+	<div id="added_groups">
+	</div>
 	<p>
 		<input type="button" value="Lägg till pass" onClick="addGroup()"/>
+		<input id="group_amount" type="number" value="1" style="width:40px;"/>
 		<select id="group" name="group">
 			<?php loadGroups(); ?>
 		</select>
-		<input id="group_amount" type="text" name="group_amount" value="0"/>
+		<input id="slot_start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $date; ?>"/>
+		<input id="slot_end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $date; ?>"/>
+		<input id="slot_points" type="number" value="0" style="width:40px;"/>
 	<p>
-	<div id="added_groups">
-	</div>
+	
 	<input type="submit" name="submit" value="Skapa event"/></p>
 </form>
