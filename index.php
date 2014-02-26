@@ -135,7 +135,7 @@ include_once('php/general.php');
 						 <h3>Lediga pass</h3>
 						 
 							 <div class="list-group">
-								<?php loadAvailableEvents() ?>
+								<?php loadAvailableEvents(); ?>
 							 </div>
 							 
 						 </div>

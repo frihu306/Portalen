@@ -183,9 +183,7 @@ function loadBookedEvents()
 		$points = $workTimes[$i]['points'];
 		?>
 		
-		<p>
 			<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
-		</p>
 		
 		<?php
 	}
