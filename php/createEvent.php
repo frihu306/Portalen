@@ -12,16 +12,6 @@ if(isset($_POST['submit']))
 	$start = $_POST['start'];
 	$end = $_POST['end'];
 	
-	if(isset($_POST['slotGroups']))
-	{
-		$slotGroups = $_POST['slotGroups'];
-		$groupIds = DBQuery::sql("SELECT id FROM work_group WHERE name = '$slotGroups[0]'");
-		$groupId = $groupIds[0]['id'];
-		$eventId = mysql_insert_id();
-		echo $groupId.' '.$eventId;
-		
-	}
-	
 	$periodId = DBQuery::sql("SELECT id FROM period WHERE start_date < '$start' AND end_date > '$start'");
 	$periodId = $periodId[0]['id'];
 	if($name != '' && $type != 'no' && $start != '' && $end != '' && $start < $end)
