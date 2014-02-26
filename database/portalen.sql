@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2014 at 05:46 PM
+-- Generation Time: Feb 26, 2014 at 01:22 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -34,10 +34,10 @@ CREATE TABLE IF NOT EXISTS `event` (
   `period_id` int(11) NOT NULL,
   `event_type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
   KEY `period_id` (`period_id`),
-  KEY `event_type_id` (`event_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+  KEY `event_type_id` (`event_type_id`),
+  KEY `name_3` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `event`
@@ -48,7 +48,10 @@ INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`, `event
 (2, 'Vårkravallen', '2014-03-08 22:00:00', '2014-03-09 03:00:00', 2, 2),
 (4, 'Sittning', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1, 3),
 (5, 'Personalfest', '2014-03-09 18:30:00', '2014-03-10 03:00:00', 2, 4),
-(7, 'MT <3 GDK', '2014-02-22 18:00:00', '2014-02-22 22:00:00', 1, 3);
+(7, 'MT <3 GDK', '2014-02-22 18:00:00', '2014-02-22 22:00:00', 1, 3),
+(10, 'Fotbollstisdag', '2014-02-25 20:00:00', '2014-02-25 22:00:00', 1, 1),
+(11, 'Onsdagspub', '2014-02-26 18:00:00', '2014-02-26 22:00:00', 1, 1),
+(26, 'Rockfesten', '2014-03-01 22:00:00', '2014-03-02 03:00:00', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -191,8 +194,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `address`, `zip`, `city`, `avatar`, `date_created`, `bank_account`, `special_food`) VALUES
-(1, 'Valross', 'valross@mail.com', '1111111234', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+(1, 'Valross', 'valross@mail.com', '1111111234', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', NULL, NULL, NULL, NULL, 'portalen_bild.jpg', '0000-00-00 00:00:00', NULL, NULL),
+(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, NULL, NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', NULL, NULL),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', NULL, NULL);
@@ -269,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -282,7 +285,22 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `
 (7, 2, 2, 6, '2014-03-08 19:00:00', '2014-03-09 05:00:00'),
 (8, 2, 2, 6, '2014-03-08 19:00:00', '2014-03-09 05:00:00'),
 (9, 6, 5, 0, '2014-03-09 18:00:00', '2014-03-10 03:00:00'),
-(10, 10, 5, 0, '2014-03-09 18:00:00', '2014-02-10 03:00:00');
+(10, 10, 5, 0, '2014-03-09 18:00:00', '2014-02-10 03:00:00'),
+(11, 6, 10, 2, '2014-02-25 19:00:00', '2014-02-25 23:00:00'),
+(35, 4, 26, 6, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(36, 4, 26, 6, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(37, 4, 26, 6, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(38, 4, 26, 6, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(39, 4, 26, 6, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(40, 7, 26, 6, '2014-03-01 16:00:00', '2014-03-02 05:00:00'),
+(41, 5, 26, 0, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(42, 5, 26, 0, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(43, 6, 26, 6, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(44, 6, 26, 6, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(45, 6, 26, 6, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(46, 6, 26, 6, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(47, 10, 26, 0, '2014-03-01 19:00:00', '2014-03-02 05:00:00'),
+(48, 10, 26, 0, '2014-03-01 19:00:00', '2014-03-02 05:00:00');
 
 --
 -- Constraints for dumped tables

@@ -12,12 +12,39 @@ if(isset($_POST['submit']))
 	$start = $_POST['start'];
 	$end = $_POST['end'];
 	
+	if(isset($_POST['slotGroups']))
+	{
+		$slotGroups = $_POST['slotGroups'];
+		$groupIds = DBQuery::sql("SELECT id FROM work_group WHERE name = '$slotGroups[0]'");
+		$groupId = $groupIds[0]['id'];
+		$eventId = mysql_insert_id();
+		echo $groupId.' '.$eventId;
+		
+	}
+	
 	$periodId = DBQuery::sql("SELECT id FROM period WHERE start_date < '$start' AND end_date > '$start'");
 	$periodId = $periodId[0]['id'];
 	if($name != '' && $type != 'no' && $start != '' && $end != '' && $start < $end)
 	{
-		DBQuery::sql("INSERT INTO event (name, event_type_id, start_time, end_time, period_id)
-						VALUES ('$name', '$type', '$start', '$end', '$periodId')");
+		DBQuery::sql("INSERT INTO event (id, name, event_type_id, start_time, end_time, period_id)
+						VALUES ('', '$name', '$type', '$start', '$end', '$periodId')", False);
+		$eventId = mysql_insert_id();
+		DBConnect::close();
+		if(isset($_POST['slotGroups']))
+		{
+			$slotGroups = $_POST['slotGroups'];
+			$slotStarts = $_POST['slotStarts'];
+			$slotEnds = $_POST['slotEnds'];
+			$slotPoints = $_POST['slotPoints'];
+			
+			for($i = 0; $i < count($slotGroups); ++$i)
+			{
+				$groupIds = DBQuery::sql("SELECT id FROM work_group WHERE name = '$slotGroups[$i]'");
+				$groupId = $groupIds[0]['id'];
+				DBQuery::sql("INSERT INTO work_slot (group_id, event_id, start_time, end_time, points)
+						VALUES ('$groupId', '$eventId', '$slotStarts[$i]', '$slotEnds[$i]', '$slotPoints[$i]')");
+			}
+		}
 		?>
 		<script>
 			window.location = "createEvent.php";
@@ -166,8 +193,8 @@ function removeSlot(id)
 		<select id="group" name="group">
 			<?php loadGroups(); ?>
 		</select>
-		<input id="slot_start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $date; ?>"/>
-		<input id="slot_end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $date; ?>"/>
+		<input id="slot_start" class="datepicker" type="text" placeholder="Starttid" value="<?php echo $date; ?>"/>
+		<input id="slot_end" class="datepicker" type="text" placeholder="Sluttid" value="<?php echo $date; ?>"/>
 		<input id="slot_points" type="number" value="0" style="width:40px;"/>
 	<p>
 	
