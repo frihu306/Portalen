@@ -10,7 +10,7 @@ $dateNoTime = $dates->format('Y-m-d');
 				
 $workedPointsResult = DBQuery::sql	("SELECT points FROM work_slot WHERE event_id IN
 										(SELECT id FROM event WHERE period_id IN 
-											(SELECT id FROM period WHERE start_date <= '$date' AND end_date >= '$date')
+											(SELECT id FROM period WHERE start_date <= '$dateNoTime' AND end_date >= '$dateNoTime')
 										) 
 									AND id IN
 										(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '1')
@@ -20,7 +20,7 @@ $workedPoints = 0;
 
 $bookedPointsResult = DBQuery::sql	("SELECT points FROM work_slot WHERE event_id IN
 										(SELECT id FROM event WHERE period_id IN 
-											(SELECT id FROM period WHERE start_date <= '$date' AND end_date >= '$date')
+											(SELECT id FROM period WHERE start_date <= '$dateNoTime' AND end_date >= '$dateNoTime')
 										) 
 									AND id IN
 										(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '0')
@@ -129,7 +129,7 @@ function loadUpcomingEvents()
 }
 //
 //Load current period
-$periodDates = DBquery::sql("SELECT start_date, end_date FROM period WHERE start_date <= '$date' AND end_date >= '$date'");
+$periodDates = DBquery::sql("SELECT start_date, end_date FROM period WHERE start_date <= '$dateNoTime' AND end_date >= '$dateNoTime'");
 $periodStart = "";
 $periodEnd = "";
 if(count($periodDates) == 1)
