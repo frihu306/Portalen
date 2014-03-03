@@ -27,7 +27,7 @@ if(isset($_POST['log_in']))
 		//Change to hardcoded url later to get rid of index.php in url
 		?>
 		<script>
-			window.location = "index.php";
+			window.location = "index.php?page=start";
 		</script>
 		<?php
 	}
