@@ -17,9 +17,8 @@ if(isset($_POST['submit']))
 	if($name != '' && $type != 'no' && $start != '' && $end != '' && $start < $end)
 	{
 		DBQuery::sql("INSERT INTO event (id, name, event_type_id, start_time, end_time, period_id)
-						VALUES ('', '$name', '$type', '$start', '$end', '$periodId')", False);
-		$eventId = mysql_insert_id();
-		DBConnect::close();
+						VALUES ('', '$name', '$type', '$start', '$end', '$periodId')");
+		$eventId = DBQuery::$lastId;
 		if(isset($_POST['slotGroups']))
 		{
 			$slotGroups = $_POST['slotGroups'];

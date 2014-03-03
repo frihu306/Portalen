@@ -4,14 +4,15 @@ include_once('DBConnect.php');
 
 class DBQuery
 {			
-	public static function sql($sql, $close = True)
+
+	public static $lastId;
+
+	public static function sql($sql)
 	{
 		DBConnect::open();
 		$result = mysql_query($sql);
-		if($close == True)
-		{
-			DBConnect::close();
-		}
+		self::$lastId = mysql_insert_id();
+		DBConnect::close();
 		$rows = array();
 		if(strtolower(substr($sql,0,6)) == 'select')
 		{
