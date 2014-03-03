@@ -24,16 +24,20 @@ body {height: 100%; }
 	#content {
 		padding: 20px;
 	}	
+
+	.navbar-collapse {
+		background: #21201e;
+		border-top: 0;
+	}
+	
 }
-
-
 
 
 @media (min-width: 992px) {
 	
 	#content {
 		margin-left: 240px;
-		padding: 10px 30px 30px 30px;
+		padding: 10px 30px 10px 30px;
 	}
 	
 	#sidebar {

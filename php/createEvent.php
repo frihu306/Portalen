@@ -16,8 +16,25 @@ if(isset($_POST['submit']))
 	$periodId = $periodId[0]['id'];
 	if($name != '' && $type != 'no' && $start != '' && $end != '' && $start < $end)
 	{
-		DBQuery::sql("INSERT INTO event (name, event_type_id, start_time, end_time, period_id)
-						VALUES ('$name', '$type', '$start', '$end', '$periodId')");
+		DBQuery::sql("INSERT INTO event (id, name, event_type_id, start_time, end_time, period_id)
+						VALUES ('', '$name', '$type', '$start', '$end', '$periodId')", False);
+		$eventId = mysql_insert_id();
+		DBConnect::close();
+		if(isset($_POST['slotGroups']))
+		{
+			$slotGroups = $_POST['slotGroups'];
+			$slotStarts = $_POST['slotStarts'];
+			$slotEnds = $_POST['slotEnds'];
+			$slotPoints = $_POST['slotPoints'];
+			
+			for($i = 0; $i < count($slotGroups); ++$i)
+			{
+				$groupIds = DBQuery::sql("SELECT id FROM work_group WHERE name = '$slotGroups[$i]'");
+				$groupId = $groupIds[0]['id'];
+				DBQuery::sql("INSERT INTO work_slot (group_id, event_id, start_time, end_time, points)
+						VALUES ('$groupId', '$eventId', '$slotStarts[$i]', '$slotEnds[$i]', '$slotPoints[$i]')");
+			}
+		}
 		?>
 		<script>
 			window.location = "createEvent.php";
@@ -64,13 +81,16 @@ function loadGroups()
 <link rel="stylesheet" href="../css/jquery-ui-timepicker-addon.css">
 <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 <script src="../js/ui-datepicker.js"></script>
-<script src="../js/ui-timepicker-addon.js"></script>
+<script src="../js/ui_timepicker-addon.js"></script>
 <script>
 	$(function() {
 		$( ".datepicker" ).datetimepicker();
 	});
 </script>
 <script>
+
+//Global variables
+var countSlots = 0;
 
 Date.prototype.yyyymmdd = function() {         
                                 
@@ -117,11 +137,25 @@ function getTemplate(id)
 function addGroup()
 {
 	var group = $("#group option:selected").text();
+	var start = $("#slot_start").val();
+	var end = $("#slot_end").val();
+	var points = $("#slot_points").val();
 	var amount = $("#group_amount").val();
 	for(var i = 0; i < amount; ++i)
 	{
-		$("#added_groups").append("<p>"+ group +"</p>");
+		$("#added_groups").append("<p id='slot" + countSlots + "'>"
+		+ "<input type='text' value='" + group + "' name='slotGroups[]' style='border:0px;' size='11' readonly />"
+		+ "<input class='datepicker' type='text' value='" + start + "' name='slotStarts[]' />"
+		+ "<input class='datepicker' type='text' value='" + end + "' name='slotEnds[]' />"
+		+ "<input type='number' value='" + points + "' name='slotPoints[]' style='width:40px;' />"
+		+ "<button type='button' onclick='removeSlot(" + countSlots + ")'>X</button></p>");
+		++countSlots;
 	}
+}
+
+function removeSlot(id)
+{
+	$("#slot" + id).remove();
 }
 
 </script>
@@ -141,14 +175,18 @@ function addGroup()
 	</p>
 	<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $date; ?>"/></p>
 	<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $date; ?>"/></p>
+	<div id="added_groups">
+	</div>
 	<p>
 		<input type="button" value="Lägg till pass" onClick="addGroup()"/>
+		<input id="group_amount" type="number" value="1" style="width:40px;"/>
 		<select id="group" name="group">
 			<?php loadGroups(); ?>
 		</select>
-		<input id="group_amount" type="text" name="group_amount" value="0"/>
+		<input id="slot_start" class="datepicker" type="text" placeholder="Starttid" value="<?php echo $date; ?>"/>
+		<input id="slot_end" class="datepicker" type="text" placeholder="Sluttid" value="<?php echo $date; ?>"/>
+		<input id="slot_points" type="number" value="0" style="width:40px;"/>
 	<p>
-	<div id="added_groups">
-	</div>
+	
 	<input type="submit" name="submit" value="Skapa event"/></p>
 </form>
