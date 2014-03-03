@@ -86,6 +86,8 @@ include_once('php/pageManager.php');
 		              <li><a href="?page=news"><span class="glyphicon glyphicon-bullhorn"></span>Nyheter</a></li>
 					  <li><a href="?page=forum"><span class="glyphicon glyphicon-comment"></span>Diskussionsforum</a></li>
 					  <li><a href="?page=groups"><span class="glyphicon glyphicon-globe"></span>Lagsidor</a></li>
+					  <li><a href="?page=createEvent"><span class="glyphicon glyphicon-globe"></span>Skapa evenemang</a></li>
+					  <li><a href="?page=createAccount"><span class="glyphicon glyphicon-globe"></span>Skapa nytt konto</a></li>
 		            </ul>
 		          </div><!--/.nav-collapse -->
 		        
