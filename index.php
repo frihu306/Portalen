@@ -118,16 +118,7 @@ include_once('php/pageManager.php');
 			 <div class="top-div"></div>
    		 	 
    		 	 <div class="row">
-				<?php 
-					if(isset($_GET['page']))
-					{
-						loadPage($_GET['page']);
-					}
-					else
-					{
-						loadPage('start');
-					}
-				?>
+				<?php content(); ?>
    		 	 </div>
 			 
 		  <div class="row">

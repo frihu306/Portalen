@@ -12,4 +12,16 @@ function loadPage($pageName)
 	}
 }
 
+function content()
+{
+	if(isset($_GET['page']))
+		{
+			loadPage($_GET['page']);
+		}
+		else
+		{
+			loadPage('start');
+		}
+}
+
 ?>
