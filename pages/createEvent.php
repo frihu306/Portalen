@@ -94,8 +94,8 @@ function removeSlot(id)
 			<?php loadTypes(); ?>
 		</select>
 	</p>
-	<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $date; ?>"/></p>
-	<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $date; ?>"/></p>
+	<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $dateNoTime; ?>"/></p>
+	<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $dateNoTime; ?>"/></p>
 	<div id="added_groups">
 	</div>
 	<p>
@@ -104,8 +104,8 @@ function removeSlot(id)
 		<select id="group" name="group">
 			<?php loadGroups(); ?>
 		</select>
-		<input id="slot_start" class="datepicker" type="text" placeholder="Starttid" value="<?php echo $date; ?>"/>
-		<input id="slot_end" class="datepicker" type="text" placeholder="Sluttid" value="<?php echo $date; ?>"/>
+		<input id="slot_start" class="datepicker" type="text" placeholder="Starttid" value="<?php echo $dateNoTime; ?>"/>
+		<input id="slot_end" class="datepicker" type="text" placeholder="Sluttid" value="<?php echo $dateNoTime; ?>"/>
 		<input id="slot_points" type="number" value="0" style="width:40px;"/>
 	<p>
 	

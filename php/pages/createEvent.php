@@ -1,10 +1,6 @@
 <?php
 include_once('php/DBQuery.php');
 
-$date = new DateTime;
-$date->setTimezone(new DateTimeZone('Europe/Stockholm'));
-$date = $date->format('Y-m-d');
-
 if(isset($_POST['submit']))
 {
 	$name = $_POST['name'];

@@ -2,6 +2,9 @@
 
 function loadPage($pageName)
 {
+	global $date;
+	global $dateNoTime;
+	
 	if(file_exists('php/pages/'.$pageName.'.php'))
 	{
 		include('php/pages/'.$pageName.'.php');
