@@ -29,6 +29,9 @@ else
 		$end->add(new DateInterval('P1D'));
 		$end = $end->format('Y-m-d H:i');
 	}*/
+	
+	$templateSlots = DBQuery::sql("SELECT start_time, end_time, points, group_id FROM event_template_group WHERE event_template_id = '$id'");
+	
 	echo '{"type":'.$type.',"start":"'.$start.'","end":"'.$end.'"}';
 }
 
