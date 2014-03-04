@@ -70,34 +70,34 @@ function removeSlot(id)
 }
 
 </script>
-<form action="" method="post">
-	<p><input type="text" placeholder="Namn" name="name"/></p>
-	<p>
-		<select name="template" onchange="getTemplate(this.value)">
-			<option value="no">Ingen mall</option>
-			<?php loadTemplates(); ?>
-		</select>
-	</p>
-	<p>
-		<select name="type">
-			<option id="typeno" value="no">Välj typ</option>
-			<?php loadTypes(); ?>
-		</select>
-	</p>
-	<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $dateNoTime; ?>"/></p>
-	<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $dateNoTime; ?>"/></p>
-	<div id="added_groups">
-	</div>
-	<p>
-		<input type="button" value="Lägg till pass" onClick="addGroup()"/>
-		<input id="group_amount" type="number" value="1" style="width:40px;"/>
-		<select id="group" name="group">
-			<?php loadGroups(); ?>
-		</select>
-		<input id="slot_start" class="datepicker" type="text" placeholder="Starttid" value="<?php echo $dateNoTime; ?>"/>
-		<input id="slot_end" class="datepicker" type="text" placeholder="Sluttid" value="<?php echo $dateNoTime; ?>"/>
-		<input id="slot_points" type="number" value="0" style="width:40px;"/>
-	<p>
-	
-	<input type="submit" name="submit" value="Skapa event"/></p>
-</form>
+<div class="col-sm-5">
+	<form action="" method="post">
+		<p><input type="text" placeholder="Namn" name="name"/></p>
+		<p>
+			<select name="template" onchange="getTemplate(this.value)">
+				<option value="no">Ingen mall</option>
+				<?php loadTemplates(); ?>
+			</select>
+		</p>
+		<p>
+			<select name="type">
+				<option id="typeno" value="no">Välj typ</option>
+				<?php loadTypes(); ?>
+			</select>
+		</p>
+		<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $dateNoTime; ?>"/></p>
+		<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $dateNoTime; ?>"/></p>
+		<p>
+			<input type="button" value="Lägg till pass" onClick="addGroup()"/>
+			<input id="group_amount" type="number" value="1" style="width:40px;"/>
+			<select id="group" name="group">
+				<?php loadGroups(); ?>
+			</select>
+			<input id="slot_start" class="datepicker" type="text" placeholder="Starttid" value="<?php echo $dateNoTime; ?>"/>
+			<input id="slot_end" class="datepicker" type="text" placeholder="Sluttid" value="<?php echo $dateNoTime; ?>"/>
+			<input id="slot_points" type="number" value="0" style="width:40px;"/>
+		<p>
+		<div id="added_groups"></div>
+		<input type="submit" name="submit" value="Skapa event"/></p>
+	</form>
+</div>
