@@ -70,7 +70,7 @@ function removeSlot(id)
 }
 
 </script>
-<div class="col-sm-5">
+<div class="col-sm-10">
 	<form action="" method="post">
 		<p><input type="text" placeholder="Namn" name="name"/></p>
 		<p>
