@@ -19,6 +19,8 @@ include_once('php/pageManager.php');
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="css/jquery-ui-timepicker-addon.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -139,5 +141,12 @@ include_once('php/pageManager.php');
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+	<script src="js/ui-datepicker.js"></script>
+	<script src="js/ui_timepicker-addon.js"></script>
+	<script>
+		$(function() {
+			$( ".datepicker" ).datetimepicker();
+		});
+	</script>
   </body>
 </html>

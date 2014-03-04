@@ -1,13 +1,3 @@
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="css/jquery-ui-timepicker-addon.css">
-<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script src="js/ui-datepicker.js"></script>
-<script src="js/ui_timepicker-addon.js"></script>
-<script>
-	$(function() {
-		$( ".datepicker" ).datetimepicker();
-	});
-</script>
 <script>
 
 //Global variables
