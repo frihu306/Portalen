@@ -9,6 +9,7 @@ class DBConnect
 	{
 		self::$mysql = mysql_connect("localhost","portalen","portalen") or die("Unable to connect to MySQL");
 		mysql_select_db("portalen");
+		mysql_set_charset('utf8');
 	}
 	
 	public static function close()

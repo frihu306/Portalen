@@ -6,16 +6,21 @@ if(!isset($_SESSION['user_id']))
 }
 
 include_once('php/general.php');
+include_once('php/pageManager.php');
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <title>Trappans personalportal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="css/jquery-ui-timepicker-addon.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,11 +44,11 @@ include_once('php/general.php');
 					  <div class="progress">
 					    <div class="progress-bar worked" style="width: <?php echo $workedPointsPercent ?>%">
 						<!--<p> 3p </p>
-					      <span class="sr-only">3 arbetade poäng</span>-->
+					      <span class="sr-only">3 arbetade poÃƒÂ¤ng</span>-->
 					    </div>
 					    <div class="progress-bar booked" style="width: <?php echo $bookedPointsPercent ?>%">
 						<!--<p> 3p </p>
-					      <span class="sr-only">3 bokade poäng</span> -->
+					      <span class="sr-only">3 bokade poÃƒÂ¤ng</span> -->
 					    </div>
 					  </div> <!-- .progress -->
 					  
@@ -65,24 +70,26 @@ include_once('php/general.php');
 		          </div>
 				  
 				  
-		          <div class="navbar-collapse collapse" style="border: 1px solid #f00;">
+		          <div class="navbar-collapse collapse">
 		            <ul class="main-nav">
-		              <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span>Hem</a></li>
+		              <li class="active"><a href="?page=start"><span class="glyphicon glyphicon-home"></span>Hem</a></li>
 		              <li class="dropdown">
 		                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>Mitt konto <b class="caret"></b></a>
 		                <ul class="dropdown-menu">
 		                  <li><a href="#">Arbetade pass</a></li>
 		                  <li><a href="#">Meddelanden</a></li>
 		                  <li class="divider"></li>
-		                  <li class="dropdown-header">Inställningar</li>
+		                  <li class="dropdown-header">InstÃ¤llningar</li>
 		                  <li><a href="#">Redigera profil</a></li>
 		                  <li><a href="#">Avsluta medlemskap</a></li>
 		                </ul>
 		              </li>
-		              <li><a href="#about"><span class="glyphicon glyphicon-list-alt"></span>Boka pass</a></li>
-		              <li><a href="#contact"><span class="glyphicon glyphicon-bullhorn"></span>Nyheter</a></li>
-					  <li><a href="#contact"><span class="glyphicon glyphicon-comment"></span>Diskussionsforum</a></li>
-					  <li><a href="#contact"><span class="glyphicon glyphicon-globe"></span>Lagsidor</a></li>
+		              <li><a href="?page=book" onclick="location.reload()"><span class="glyphicon glyphicon-list-alt"></span>Boka pass</a></li>
+		              <li><a href="?page=news"><span class="glyphicon glyphicon-bullhorn"></span>Nyheter</a></li>
+					  <li><a href="?page=forum"><span class="glyphicon glyphicon-comment"></span>Diskussionsforum</a></li>
+					  <li><a href="?page=groups"><span class="glyphicon glyphicon-globe"></span>Lagsidor</a></li>
+					  <li><a href="?page=createEvent"><span class="glyphicon glyphicon-globe"></span>Skapa evenemang</a></li>
+					  <li><a href="?page=createAccount"><span class="glyphicon glyphicon-globe"></span>Skapa nytt konto</a></li>
 		            </ul>
 		          </div><!--/.nav-collapse -->
 		        
@@ -97,54 +104,49 @@ include_once('php/general.php');
 
 		  <div id="content">
 			  <div class="row">
-				  <div class="col-sm-12">
-					  <span class="glyphicon glyphicon-search"></span>
+				  <div class="col-sm-4 search">
+					  <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+				  		<input type="search" class="form-control" placeholder="SÃ¶k pÃ¥ portalen...">
+				  </div> <!-- col-sm-4 -->
+					  
+				  	<div class="col-sm-8">
 					  <div class="user-info">
-						  <img src="profile.jpg" width="32px" height="32px">
+						  <img src="<?php echo loadAvatar(); ?>" class="avatar-32x32" width="32px" height="32px">
 						  <a href="http://google.se" class="username"><span style="font-weight: normal">Inloggad som</span> <?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></a>
 					  	<a href="login.php" class="sign-out"><span class="glyphicon glyphicon-off"></span></a>
 					  </div>
 				  </div>
 		 	 </div> 
 			 <div class="top-div"></div>
+   		 	 
    		 	 <div class="row">
-				 <div class="col-sm-12">
-				 	<h4 style="font-weight: 200;">Kommande pass</h4>
-					<?php
-						loadUpcomingEvents($date);
-					?>
-			 	 </div>
+				<?php content(); ?>
    		 	 </div>
-   		 	 <div class="row">
-				 <div class="col-sm-5">
-					 <div class="row">
-						 <div class="col-sm-12"><h4>Dina bokade pass</h4>
-							<?php loadBookedEvents(); ?>
-						 </div>
-						 <div class="col-sm-12"><h4>Lediga pass</h4></div>
-				 	</div>
-				 </div>
-				 <div class="col-sm-7"><h1 class="thin-100">Ny termin och nya arbetspass!</h1>
-
-					 <p>Hej! Terminen har dragit igång och det finns några pass kvar i januari att fylla. Framförallt på Vinterkravallen och Nollefesten, där behöver vi dessutom allapass som vem som helst kan jobba som! Annars finns det nu pass för februari, och som vanligt gäller det att jobba 8 poäng eller motsvarande för att få personalförmåner. Nästa personalfest är i mars, så för att få gå på den måste man ha jobbat sina poäng i både dec/jan och februari! Alternativt vara nybyggare och aldrig ha gått på en personalfest innan.
-
-Ny termin betyder också ny personal, onsdagen den 5/2 kl 18 kommer vi ha infokväll på Trappan! Så om ni känner någon som är sugen på att börja men vill ha mer information om lagen och Trappan - tipsa dem om infokvällen!
-
-Dagen innan infokvällen, alltså tisdagen 4/2, vill vi istället hylla er som redan jobbar på Trappan genom att ha personalpub! Denna gång är det marknadsföringslaget och barlaget som ska anordna, mer information kommer inom kort.Hej! Terminen har dragit igång och det finns några pass kvar i januari att fylla. Framförallt på Vinterkravallen och Nollefesten, där behöver vi dessutom allapass som vem som helst kan jobba som! Annars finns det nu pass för februari, och som vanligt gäller det att jobba 8 poäng eller motsvarande för att få personalförmåner. Nästa personalfest är i mars, så för att få gå på den måste man ha jobbat sina poäng i både dec/jan och februari! Alternativt vara nybyggare och aldrig ha gått på en personalfest innan.
-
-Ny termin betyder också ny personal, onsdagen den 5/2 kl 18 kommer vi ha infokväll på Trappan! Så om ni känner någon som är sugen på att börja men vill ha mer information om lagen och Trappan - tipsa dem om infokvällen!
-
-Dagen innan infokvällen, alltså tisdagen 4/2, vill vi istället hylla er som redan jobbar på Trappan genom att ha personalpub! Denna gång är det marknadsföringslaget och barlaget som ska anordna, mer information kommer inom kort</p></div>
-   		 	 </div>
+			 
+		  <div class="row">
+			  <div id="footer">
+			  <div class="col-sm-10">
+				  <p>Trappans Personalportal 2014. <a href="?page=about">Om portalen</a>. <br />Kontakta Trappans <a href="#">webbansvarig</a> vid problem eller frÃ¥gor. Portalen anvÃ¤nder sig av <a href="http://glyphicons.com/" target="_blank">Glyphicons</a>.
+			  </div>
+			  <div class="col-sm-2 text-right">
+				  <a href="#top" class="scroll-to-top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+			  </div>
+		 	  </div> <!-- #footer -->
+		  </div>
 			 
    	 	</div> <!-- end #content -->
 	</div> <!-- #page-container -->
 	
-	
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+	<script src="js/ui-datepicker.js"></script>
+	<script src="js/ui_timepicker-addon.js"></script>
+	<script>
+		$(function() {
+			$( ".datepicker" ).datetimepicker();
+		});
+	</script>
   </body>
 </html>
