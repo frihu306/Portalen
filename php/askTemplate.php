@@ -32,6 +32,19 @@ else
 	
 	$templateSlots = DBQuery::sql("SELECT start_time, end_time, points, group_id FROM event_template_group WHERE event_template_id = '$id'");
 	
+	$json = '{"type":'.$type.',"start":"'.$start.'","end":"'.$end.'","slots":[';
+	for($i = 0; $i < count($templateSlots); ++$i)
+	{
+		$slotStart = new DateTime($templateSlots[$i]['start_time']);
+		$slotStart = $slotStart->format('H:i');
+		$slotEnd = new DateTime($templateSlots[$i]['end_time']);
+		$slotEnd = $slotEnd->format('H:i');
+		$points = $templateSlots[$i]['points'];
+		$groupId = $templateSlots[$i]['group_id'];
+		$json .= '{}';
+	}
+	$json .= ']}';
+	
 	echo '{"type":'.$type.',"start":"'.$start.'","end":"'.$end.'"}';
 }
 
