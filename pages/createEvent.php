@@ -29,9 +29,25 @@ function getTemplate(id)
 		{
 			var jsonObj = JSON.parse(xmlhttp.responseText);
 			var date = new Date();
+			var jsonSlots = jsonObj.slots;
 			$("#type" + jsonObj.type).attr("selected", "selected");
 			$("#start").attr("value", date.yyyymmdd() + " " + jsonObj.start);
-			
+			$("#added_groups").html("");
+			for(var i = 0; i < jsonSlots.length; ++i)
+			{
+				var slotStart = $("#start").val().substring(0,10) + ' ' + jsonSlots[i].start;
+				var slotEnd = $("#end").val().substring(0,10) + ' ' + jsonSlots[i].end;
+				if(slotEnd < slotStart)
+				{
+					slotEnd
+				}
+				$("#added_groups").append("<p id='slot" + countSlots + "'>"
+					+ "<input type='text' value='" + jsonSlots[i].group + "' name='slotGroups[]' style='border:0px;' size='11' readonly />"
+					+ "<input class='datepicker' type='text' value='" + $("#start").val().substring(0,10) + ' ' + jsonSlots[i].start + "' name='slotStarts[]' />"
+					+ "<input class='datepicker' type='text' value='" + $("#end").val().substring(0,10) + ' ' + jsonSlots[i].end + "' name='slotEnds[]' />"
+					+ "<input type='number' value='" + jsonSlots[i].points + "' name='slotPoints[]' style='width:40px;' />"
+					+ "<button type='button' onclick='removeSlot(" + countSlots + ")'>X</button></p>");
+			}
 			var endDate = new Date();
 			if(jsonObj.end < jsonObj.start)
 			{
@@ -55,11 +71,11 @@ function addGroup()
 	for(var i = 0; i < amount; ++i)
 	{
 		$("#added_groups").append("<p id='slot" + countSlots + "'>"
-		+ "<input type='text' value='" + group + "' name='slotGroups[]' style='border:0px;' size='11' readonly />"
-		+ "<input class='datepicker' type='text' value='" + start + "' name='slotStarts[]' />"
-		+ "<input class='datepicker' type='text' value='" + end + "' name='slotEnds[]' />"
-		+ "<input type='number' value='" + points + "' name='slotPoints[]' style='width:40px;' />"
-		+ "<button type='button' onclick='removeSlot(" + countSlots + ")'>X</button></p>");
+			+ "<input type='text' value='" + group + "' name='slotGroups[]' style='border:0px;' size='11' readonly />"
+			+ "<input class='datepicker' type='text' value='" + start + "' name='slotStarts[]' />"
+			+ "<input class='datepicker' type='text' value='" + end + "' name='slotEnds[]' />"
+			+ "<input type='number' value='" + points + "' name='slotPoints[]' style='width:40px;' />"
+			+ "<button type='button' onclick='removeSlot(" + countSlots + ")'>X</button></p>");
 		++countSlots;
 	}
 }

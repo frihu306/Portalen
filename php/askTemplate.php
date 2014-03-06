@@ -30,7 +30,9 @@ else
 		$end = $end->format('Y-m-d H:i');
 	}*/
 	
-	$templateSlots = DBQuery::sql("SELECT start_time, end_time, points, group_id FROM event_template_group WHERE event_template_id = '$id'");
+	$templateSlots = DBQuery::sql	("SELECT start_time, end_time, points, name FROM event_template_group
+									INNER JOIN work_group ON group_id = work_group.id 
+									WHERE event_template_id = '$id'");
 	
 	$json = '{"type":'.$type.',"start":"'.$start.'","end":"'.$end.'","slots":[';
 	for($i = 0; $i < count($templateSlots); ++$i)
@@ -40,12 +42,12 @@ else
 		$slotEnd = new DateTime($templateSlots[$i]['end_time']);
 		$slotEnd = $slotEnd->format('H:i');
 		$points = $templateSlots[$i]['points'];
-		$groupId = $templateSlots[$i]['group_id'];
-		$json .= '{}';
+		$groupId = $templateSlots[$i]['name'];
+		$json .= '{"start":"'.$slotStart.'","end":"'.$slotEnd.'","points":'.$points.',"group":"'.$groupId.'"}';
 	}
 	$json .= ']}';
 	
-	echo '{"type":'.$type.',"start":"'.$start.'","end":"'.$end.'"}';
+	echo $json;
 }
 
 ?>
