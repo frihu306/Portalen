@@ -44,6 +44,9 @@ else
 		$points = $templateSlots[$i]['points'];
 		$groupId = $templateSlots[$i]['name'];
 		$json .= '{"start":"'.$slotStart.'","end":"'.$slotEnd.'","points":'.$points.',"group":"'.$groupId.'"}';
+		if($i != count($templateSlots) - 1){
+			$json .= ',';
+		}
 	}
 	$json .= ']}';
 	

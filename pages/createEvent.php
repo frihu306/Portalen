@@ -40,14 +40,15 @@ function getTemplate(id)
 				var slotEnd = $("#end").val().substring(0,10);
 				slotEndDate.setFullYear(slotEnd.substring(0,4),slotEnd.substring(5,7),slotEnd.substring(8,10));
 				slotEndDate.setMonth(slotEndDate.getMonth() - 1);
-				if(slotEnd < slotStart)
+				if(jsonSlots[i].end < jsonSlots[i].start)
 				{
 					slotEndDate.setDate(slotEndDate.getDate() + 1);
 				}
+				slotEnd = slotEndDate.yyyymmdd() + ' ' + jsonSlots[i].end;
 				$("#added_groups").append("<p id='slot" + countSlots + "'>"
 					+ "<input type='text' value='" + jsonSlots[i].group + "' name='slotGroups[]' style='border:0px;' size='11' readonly />"
-					+ "<input class='datepicker' type='text' value='" + $("#start").val().substring(0,10) + ' ' + jsonSlots[i].start + "' name='slotStarts[]' />"
-					+ "<input class='datepicker' type='text' value='" + slotEndDate.yyyymmdd() + ' ' + jsonSlots[i].end + "' name='slotEnds[]' />"
+					+ "<input class='datepicker' type='text' value='" + slotStart + "' name='slotStarts[]' />"
+					+ "<input class='datepicker' type='text' value='" + slotEnd + "' name='slotEnds[]' />"
 					+ "<input type='number' value='" + jsonSlots[i].points + "' name='slotPoints[]' style='width:40px;' />"
 					+ "<button type='button' onclick='removeSlot(" + countSlots + ")'>X</button></p>");
 			}
