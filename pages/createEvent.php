@@ -31,34 +31,38 @@ function getTemplate(id)
 			var date = new Date();
 			var jsonSlots = jsonObj.slots;
 			$("#type" + jsonObj.type).attr("selected", "selected");
-			$("#start").attr("value", date.yyyymmdd() + " " + jsonObj.start);
+			$("#start").val($("#start").val().substring(0,10) + " " + jsonObj.start);
+			console.log($("#start"));
+			date.setFullYear($("#start").val().substring(0,4),$("#start").val().substring(5,7),$("#start").val().substring(8,10));
 			$("#added_groups").html("");
-			for(var i = 0; i < jsonSlots.length; ++i)
-			{
-				var slotStart = $("#start").val().substring(0,10) + ' ' + jsonSlots[i].start;
-				var slotEndDate = new Date();
-				var slotEnd = $("#end").val().substring(0,10);
-				slotEndDate.setFullYear(slotEnd.substring(0,4),slotEnd.substring(5,7),slotEnd.substring(8,10));
-				slotEndDate.setMonth(slotEndDate.getMonth() - 1);
-				if(jsonSlots[i].end < jsonSlots[i].start)
-				{
-					slotEndDate.setDate(slotEndDate.getDate() + 1);
-				}
-				slotEnd = slotEndDate.yyyymmdd() + ' ' + jsonSlots[i].end;
-				$("#added_groups").append("<p id='slot" + countSlots + "'>"
-					+ "<input type='text' value='" + jsonSlots[i].group + "' name='slotGroups[]' style='border:0px;' size='11' readonly />"
-					+ "<input class='datepicker' type='text' value='" + slotStart + "' name='slotStarts[]' />"
-					+ "<input class='datepicker' type='text' value='" + slotEnd + "' name='slotEnds[]' />"
-					+ "<input type='number' value='" + jsonSlots[i].points + "' name='slotPoints[]' style='width:40px;' />"
-					+ "<button type='button' onclick='removeSlot(" + countSlots + ")'>X</button></p>");
-			}
 			var endDate = new Date();
 			if(jsonObj.end < jsonObj.start)
 			{
 				endDate.setDate(date.getDate() + 1);
 			}
 			
-			$("#end").attr("value", endDate.yyyymmdd() + " " + jsonObj.end);
+			$("#end").val(endDate.yyyymmdd() + " " + jsonObj.end);
+			
+			for(var i = 0; i < jsonSlots.length; ++i)
+			{
+				var slotStart = $("#start").val().substring(0,10) + ' ' + jsonSlots[i].start.substring(3);
+				var slotEndDate = new Date();
+				var slotStartDate = new Date();
+				var slotEnd = $("#end").val().substring(0,10);
+				slotEndDate.setFullYear(slotEnd.substring(0,4),slotEnd.substring(5,7),slotEnd.substring(8,10));
+				slotStartDate.setFullYear(slotStart.substring(0,4),slotStart.substring(5,7),slotStart.substring(8,10));
+				var daysAhead = jsonSlots[i].end.substr(0,2) - jsonSlots[i].start.substr(0,2);
+				slotEndDate.setMonth(slotEndDate.getMonth() - 1);
+				slotEndDate.setDate(slotStartDate.getDate() + daysAhead);
+				slotEnd = slotEndDate.yyyymmdd() + ' ' + jsonSlots[i].end.substring(3);
+				$("#added_groups").append("<p id='slot" + countSlots + "'>"
+					+ "<input type='text' value='" + jsonSlots[i].group + "' name='slotGroups[]' style='border:0px;' size='18' readonly />"
+					+ "<input class='datepicker' type='text' value='" + slotStart + "' name='slotStarts[]' />"
+					+ "<input class='datepicker' type='text' value='" + slotEnd + "' name='slotEnds[]' />"
+					+ "<input type='number' value='" + jsonSlots[i].points + "' name='slotPoints[]' style='width:40px;' />"
+					+ "<button type='button' onclick='removeSlot(" + countSlots + ")'>X</button></p>");
+				++countSlots;
+			}
 		}
 	}
 	xmlhttp.open("GET","php/askTemplate.php?template_id="+id, true);
@@ -75,7 +79,7 @@ function addGroup()
 	for(var i = 0; i < amount; ++i)
 	{
 		$("#added_groups").append("<p id='slot" + countSlots + "'>"
-			+ "<input type='text' value='" + group + "' name='slotGroups[]' style='border:0px;' size='11' readonly />"
+			+ "<input type='text' value='" + group + "' name='slotGroups[]' style='border:0px;' size='18' readonly />"
 			+ "<input class='datepicker' type='text' value='" + start + "' name='slotStarts[]' />"
 			+ "<input class='datepicker' type='text' value='" + end + "' name='slotEnds[]' />"
 			+ "<input type='number' value='" + points + "' name='slotPoints[]' style='width:40px;' />"
@@ -93,6 +97,8 @@ function removeSlot(id)
 <div class="col-sm-10">
 	<form action="" method="post">
 		<p><input type="text" placeholder="Namn" name="name"/></p>
+		<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $dateNoTime; ?>"/></p>
+		<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $dateNoTime; ?>"/></p>
 		<p>
 			<select name="template" onchange="getTemplate(this.value)">
 				<option value="no">Ingen mall</option>
@@ -105,8 +111,6 @@ function removeSlot(id)
 				<?php loadTypes(); ?>
 			</select>
 		</p>
-		<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $dateNoTime; ?>"/></p>
-		<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $dateNoTime; ?>"/></p>
 		<p>
 			<input type="button" value="Lägg till pass" onClick="addGroup()"/>
 			<input id="group_amount" type="number" value="1" style="width:40px;"/>
