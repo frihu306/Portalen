@@ -135,7 +135,21 @@ a {
  	   	background-color: #fff;
 	}
 	
+	.panel {
+		margin-bottom: 0px;
+		background-color: #333;
+		border-radius: 0px;
+}
+
+	.panel-collapse {
+	background-color: #2d2d2d;
 	
+	}
+	
+	
+	#sidebar > div.main-menu-wrapper > div.navbar-collapse.collapse > ul > li.panel.dropdown > a > span.glyphicon.glyphicon-chevron-down {
+float: right;
+}
 	
 /* =Content
 -------------------------------------------------------------- */

@@ -73,16 +73,15 @@ include_once('php/pageManager.php');
 		          <div class="navbar-collapse collapse">
 		            <ul class="main-nav">
 		              <li class="active"><a href="?page=start"><span class="glyphicon glyphicon-home"></span>Hem</a></li>
-		              <li class="dropdown">
-		                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>Mitt konto <b class="caret"></b></a>
-		                <ul class="dropdown-menu">
-		                  <li><a href="#">Arbetade pass</a></li>
-		                  <li><a href="#">Meddelanden</a></li>
-		                  <li class="divider"></li>
-		                  <li class="dropdown-header">Inställningar</li>
-		                  <li><a href="#">Redigera profil</a></li>
-		                  <li><a href="#">Avsluta medlemskap</a></li>
-		                </ul>
+		              <li class="panel dropdown">
+					<a data-toggle="collapse" data-parent="#menu-bar" href="#collapseOne" ><span class="glyphicon glyphicon-user"></span>Min konto<span class="glyphicon glyphicon-chevron-down"></span></a>
+						  <ul id="collapseOne" class="panel-collapse collapse">
+						  <li><a href="#">Min profil</a></li>
+						  <li><a href="#">Meddelande</a></li>
+						  <li><a href="#">Boka pass</a></li>
+						  <li><a href="#">Redigera profil</a></li>
+						  <li><a href="#">Avsluta medlemskap</a></li>
+						  </ul>
 		              </li>
 		              <li><a href="?page=book" onclick="location.reload()"><span class="glyphicon glyphicon-list-alt"></span>Boka pass</a></li>
 		              <li><a href="?page=news"><span class="glyphicon glyphicon-bullhorn"></span>Nyheter</a></li>
@@ -148,5 +147,19 @@ include_once('php/pageManager.php');
 			$( ".datepicker" ).datetimepicker();
 		});
 	</script>
+	
+					<script type="text/javascript">
+						(function($) {
+							var $window = $(window),
+								$html = $('#menu-bar');
+
+							$window.resize(function resize() {
+								if ($window.width() < 768) {
+								   return $html.removeClass('nav-stacked');
+								}
+								$html.addClass('nav-stacked');
+							}).trigger('resize');
+									})(jQuery);
+				</script>
   </body>
 </html>
