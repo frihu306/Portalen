@@ -42,12 +42,12 @@ include_once('php/pageManager.php');
  					  <small>Din period: <strong><?php echo $periodStart.' - '.$periodEnd; ?></strong></small>
  					  </p>
 					  
-					  <div class="progress">
-					    <div class="progress-bar worked" style="width: <?php echo $workedPointsPercent ?>%">
+					  <div class="progress" rel='tooltip' title="Här ska det vara ett php-script">
+					    <div class="progress-bar worked" rel='tooltip' title="<?php echo $workedPointsPercent ?>p" style="width: <?php echo $workedPointsPercent ?>%">
 						<!--<p> 3p </p>
 					      <span class="sr-only">3 arbetade poÃ¤ng</span>-->
 					    </div>
-					    <div class="progress-bar booked" style="width: <?php echo $bookedPointsPercent ?>%">
+					    <div class="progress-bar booked" rel='tooltip' title="<?php echo $bookedPointsPercent ?>p" style="width:<?php echo $bookedPointsPercent ?>%">
 						<!--<p> 3p </p>
 					      <span class="sr-only">3 bokade poÃ¤ng</span> -->
 					    </div>
@@ -162,5 +162,11 @@ include_once('php/pageManager.php');
 							}).trigger('resize');
 									})(jQuery);
 				</script>
+
+			<script language="javascript">
+			   $(document).ready(function(){
+				$("[rel='tooltip']").tooltip();
+			    })
+			</script>
   </body>
 </html>
