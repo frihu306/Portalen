@@ -79,17 +79,22 @@ include_once('php/pageManager.php');
 						  <ul id="collapseOne" class="panel-collapse collapse">
 						  <li><a href="#">Min profil</a></li>
 						  <li><a href="#">Meddelande</a></li>
-						  <li><a href="#">Boka pass</a></li>
 						  <li><a href="#">Redigera profil</a></li>
 						  <li><a href="#">Avsluta medlemskap</a></li>
+						  </ul>
+		              </li>
+		               <li class="panel dropdown">
+					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo" ><span class="glyphicon glyphicon-wrench"></span>Adminverktyg<span class="glyphicon glyphicon-chevron-down"></span></a>
+						  <ul id="collapseTwo" class="panel-collapse collapse">
+					  <li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
+					  <li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
 						  </ul>
 		              </li>
 		              <li><a href="?page=book" onclick="location.reload()"><span class="glyphicon glyphicon-list-alt"></span>Boka pass</a></li>
 		              <li><a href="?page=news"><span class="glyphicon glyphicon-bullhorn"></span>Nyheter</a></li>
 					  <li><a href="?page=forum"><span class="glyphicon glyphicon-comment"></span>Diskussionsforum</a></li>
 					  <li><a href="?page=groups"><span class="glyphicon glyphicon-globe"></span>Lagsidor</a></li>
-					  <li><a href="?page=createEvent"><span class="glyphicon glyphicon-globe"></span>Skapa evenemang</a></li>
-					  <li><a href="?page=createAccount"><span class="glyphicon glyphicon-globe"></span>Skapa nytt konto</a></li>
+
 		            </ul>
 		          </div><!--/.nav-collapse -->
 		        
@@ -163,10 +168,21 @@ include_once('php/pageManager.php');
 									})(jQuery);
 				</script>
 
-			<script language="javascript">
-			   $(document).ready(function(){
-				$("[rel='tooltip']").tooltip();
-			    })
-			</script>
+		  <script>
+  $(function() {
+    $( document ).tooltip({
+      position: {
+        using: function( position, feedback ) {
+          $( this ).css( position );
+          $( "<div>" )
+            .addClass( "arrow" )
+            .addClass( feedback.vertical )
+            .addClass( feedback.horizontal )
+            .appendTo( this );
+        }
+      }
+    });
+  });
+  </script>
   </body>
 </html>

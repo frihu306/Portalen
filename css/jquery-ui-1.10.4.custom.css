@@ -251,19 +251,57 @@
 	border-right-width: 0;
 	border-left-width: 1px;
 }
-.ui-tooltip {
-	padding: 3px;
+
+  .ui-tooltip, .arrow:after {
+    background: #fff;
+    border: 2px solid white;
+  }
+
+  .ui-tooltip {
+	padding: 5px;
 	position: absolute;
 	z-index: 9999;
 	max-width: 200px;
-	-webkit-box-shadow: 0 0 0px #aaa;
-	box-shadow: 0 0 0px #aaa;
 }
 body .ui-tooltip {
 	border-width: 0px;
 		font-size: 12px;
 		font-family: 'Roboto', sans-serif;
 }
+
+  .arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+  }
+  .arrow.top {
+    top: -16px;
+    bottom: auto;
+  }
+  .arrow.left {
+    left: 20%;
+  }
+  .arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    tranform: rotate(45deg);
+  }
+  .arrow.top:after {
+    bottom: -20px;
+    top: auto;
+  }
 
 /* Component containers
 ----------------------------------*/
