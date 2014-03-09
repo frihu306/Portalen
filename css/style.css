@@ -50,6 +50,7 @@ a {
 -------------------------------------------------------------- */
 
 
+
 	#sidebar {
 		background: #363430;
 	} 
@@ -137,7 +138,7 @@ a {
 	
 	.panel {
 		margin-bottom: 0px;
-		background-color: #333;
+		background-color: #363430;
 		border-radius: 0px;
 }
 
