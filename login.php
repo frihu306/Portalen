@@ -27,7 +27,7 @@ if(isset($_POST['log_in']))
 		//Change to hardcoded url later to get rid of index.php in url
 		?>
 		<script>
-			window.location = "index.php";
+			window.location = "index.php?page=start";
 		</script>
 		<?php
 	}
@@ -43,7 +43,7 @@ if(isset($_POST['log_in']))
     <style type="text/css">
       /* Override some defaults */
       html, body {
-        background-color: #cf7000;
+        background-color: #de851b;
       }
       body {
         padding-top: 40px; 
@@ -167,7 +167,7 @@ cursor: auto;
 					  <button class="btn primary" type="submit" name="log_in">Logga in</button>
 					</fieldset>
 				  </form></center>
-				  		<div class="info"><p>Du måste vara reggad. Lös problemet. Kontakta Hampyyz.</p></div>
+				  		<div class="info"><p>För att kunna logga in måste du vara registrerad. </br>Kontakta personalansvarig vid problem.</p></div>
 				</div>
 			 </div>
 	</div>
