@@ -27,6 +27,9 @@ a {
 .avatar-32x32 {
 	border-radius: 22px;
 }
+.avatar-96x96 {
+	border-radius: 48px;
+}
 
 /* =Typography
 -------------------------------------------------------------- */
