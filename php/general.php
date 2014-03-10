@@ -38,6 +38,8 @@ for($i = 0; $i < count($bookedPointsResult); ++$i)
 	$bookedPoints = $bookedPoints + $bookedPointsResult[$i]['points'];
 }
 
+$emptyPoints = 8 - $workedPoints - $bookedPoints;
+
 $workedPointsPercent = $workedPoints / 8 * 100;
 $bookedPointsPercent = $bookedPoints / 8 * 100;
 if($workedPointsPercent > 100)

@@ -42,12 +42,12 @@ include_once('php/pageManager.php');
  					  <small>Din period: <strong><?php echo $periodStart.' - '.$periodEnd; ?></strong></small>
  					  </p>
 					  
-					  <div class="progress" rel='tooltip' title="Här ska det vara ett php-script" >
-					    <div class="progress-bar worked" rel='tooltip' title="Arbetade: <?php echo $workedPointsPercent ?>p" style="width: <?php echo $workedPointsPercent ?>%">
+					  <div class="progress" rel='tooltip' title="Ej bokat: <?php echo $emptyPoints; ?>p" >
+					    <div class="progress-bar worked" rel='tooltip' title="Arbetade: <?php echo $workedPoints; ?>p" style="width: <?php echo $workedPointsPercent; ?>%">
 						<!--<p> 3p </p>
 					      <span class="sr-only">3 arbetade poÃ¤ng</span>-->
 					    </div>
-					    <div class="progress-bar booked" rel='tooltip'  title="Bokade: <?php echo $bookedPointsPercent ?>p" style="width:<?php echo $bookedPointsPercent ?>%">
+					    <div class="progress-bar booked" rel='tooltip'  title="Bokade: <?php echo $bookedPoints; ?>p" style="width:<?php echo $bookedPointsPercent; ?>%">
 						<!--<p> 3p </p>
 					      <span class="sr-only">3 bokade poÃ¤ng</span> -->
 					    </div>
