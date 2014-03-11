@@ -94,6 +94,16 @@ function removeSlot(id)
 }
 
 </script>
+
+	<div class="col-sm-12">
+		<div class="page-header">
+			<h1>Skapa nytt evenemang</h1>
+		</div>
+	</div>
+</div> <!-- .row -->
+
+<div class="row">
+
 <div class="col-sm-10">
 	<form action="" method="post">
 		<p><input type="text" placeholder="Namn" name="name"/></p>

@@ -47,6 +47,10 @@ a {
 	h4, h5, h6 {
 		font-weight: bold;
 	}
+	.page-header {
+	  margin: 0 0 6px;
+	  border-bottom: 0;
+	}
 
 
 /* =Sidebar

@@ -1,3 +1,12 @@
+	<div class="col-sm-12">
+		<div class="page-header">
+			<h1>Skapa nytt konto</h1>
+		</div>
+	</div>
+</div> <!-- .row -->
+
+<div class="row">
+	
 <div class="col-sm-5">
 	<form action="" method="post">
 		<p><input type="text" placeholder="Användarnamn" name="user_name"/></p>
