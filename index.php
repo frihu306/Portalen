@@ -77,7 +77,7 @@ include_once('php/pageManager.php');
 		              <li class="panel dropdown">
 					<a data-toggle="collapse" data-parent="#menu-bar" href="#collapseOne" ><span class="glyphicon glyphicon-user"></span>Min konto<span class="glyphicon glyphicon-chevron-down"></span></a>
 						  <ul id="collapseOne" class="panel-collapse collapse">
-						  <li><a href="#">Min profil</a></li>
+						  <li><a href="?page=profile">Min profil</a></li>
 						  <li><a href="#">Meddelande</a></li>
 						  <li><a href="#">Redigera profil</a></li>
 						  <li><a href="#">Avsluta medlemskap</a></li>
@@ -117,7 +117,7 @@ include_once('php/pageManager.php');
 				  	<div class="col-sm-8">
 					  <div class="user-info">
 						  <img src="<?php echo loadAvatar(); ?>" class="avatar-32x32" width="32px" height="32px">
-						  <a href="http://google.se" class="username"><span style="font-weight: normal">Inloggad som</span> <?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></a>
+						  <a href="?page=profile" class="username"><span style="font-weight: normal">Inloggad som</span> <?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></a>
 					  	<a href="login.php" class="sign-out"><span class="glyphicon glyphicon-off"></span></a>
 					  </div>
 				  </div>
