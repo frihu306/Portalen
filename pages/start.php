@@ -1,8 +1,12 @@
 <div class="col-sm-5">
 	<div class="row">
 		<div class="col-sm-12"><h3>Dina bokade pass</h3>			
-			<div class="list-group">
-				<?php loadBookedEvents(); ?>
+			<div class="list-group" data-toggle="collapse" data-parent="#menu-bar" href="#collapseThree" >
+				 <?php loadBookedEvents(); ?>
+			<ul id="collapseThree" class="panel-collapse collapse">
+				<p> Här ska det finnas ett script som hämtar event-infon. För tillfället finns det ingen event-info så det blev inget av det.
+					Andreas får gärna lägga in Lorem Ipsum och fixa marginalerna och dylikt. För som man kanske ser om jag skriver lite mer text så hamnar den ganska konstigt på högra sidan och så är det tight upptill... Puss! </p>
+			</ul>
 			</div>
 			<h3>Idag på Trappan</h3>
 			<div class="list-group">	
@@ -31,3 +35,4 @@
 		Dagen innan infokvällen, alltså tisdagen 4/2, vill vi istället hylla er som redan jobbar på Trappan genom att ha personalpub! Denna gång är det marknadsföringslaget och barlaget som ska anordna, mer information kommer inom kort.
 	</p>
 </div>
+

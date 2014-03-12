@@ -179,13 +179,13 @@ function loadBookedEvents()
 		$day = $eventDate->format('j');
 		$month = $eventDate->format('n');
 		$start = new DateTime($workTimes[$i]['start_time']);
-		$start = $start->format('j/n H:i');
+		$start = $start->format(' H:i -');
 		$end = new DateTime($workTimes[$i]['end_time']);
 		$end = $end->format('H:i');
 		$points = $workTimes[$i]['points'];
 		?>
 		
-			<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
+			<a href="#" class="list-group-item"><span class="badge"><?php echo $start.' '.$end; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
 		
 		<?php
 	}
@@ -236,7 +236,7 @@ function loadTodaysEvents()
 			$end = $end->format('H:i');
 			$type = $upcomingEvents[$i]['type_name'];
 			?>
-				<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
+				<a href="#" class="list-group-item"><span class="badge"><?php echo $start.' '.$end; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
 			<?php
 		}
 	}
