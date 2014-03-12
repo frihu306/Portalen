@@ -172,6 +172,8 @@ include_once('php/pageManager.php');
   $(function() {
     $( document ).tooltip({
       position: {
+        my: "center bottom-20",
+        at: "center top",
         using: function( position, feedback ) {
           $( this ).css( position );
           $( "<div>" )
