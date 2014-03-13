@@ -181,11 +181,11 @@ function loadBookedEvents()
 		$start = new DateTime($workTimes[$i]['start_time']);
 		$start = $start->format(' H:i -');
 		$end = new DateTime($workTimes[$i]['end_time']);
-		$end = $end->format('H:i');
+		$end = $end->format(' H:i');
 		$points = $workTimes[$i]['points'];
 		?>
 		
-			<a href="#" class="list-group-item"><span class="badge"><?php echo $start.' '.$end; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
+			<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $start. '' .$end;?><?php echo $name ?></a>
 		
 		<?php
 	}
@@ -231,12 +231,12 @@ function loadTodaysEvents()
 			
 			$day = $eventDate->format('j');
 			$month = $eventDate->format('n');
-			$start = $eventDate->format('H:i');
+			$start = $eventDate->format('H:i -');
 			$end = new DateTime($upcomingEvents[$i]['end_time']);
-			$end = $end->format('H:i');
+			$end = $end->format(' H:i');
 			$type = $upcomingEvents[$i]['type_name'];
 			?>
-				<a href="#" class="list-group-item"><span class="badge"><?php echo $start.' '.$end; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
+				<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $start. '' .$end;?><?php echo $name ?></a>
 			<?php
 		}
 	}
@@ -274,13 +274,13 @@ function loadAvailableEvents()
 		$eventDate = new DateTime($availableEvents[$i]['start_time']);
 		$day = $eventDate->format('j');
 		$month = $eventDate->format('n');
-		$start = $eventDate->format('H:i');
+		$start = $eventDate->format('H:i -');
 		$end = new DateTime($availableEvents[$i]['end_time']);
-		$end = $end->format('H:i');
+		$end = $end->format(' H:i');
 		$type = $availableEvents[$i]['type_name'];
 
 		?>
-			<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
+			<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $start. '' .$end;?><?php echo $name ?></a>
 		<?php
 	}
 }
