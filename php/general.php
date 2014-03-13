@@ -40,8 +40,14 @@ for($i = 0; $i < count($bookedPointsResult); ++$i)
 
 $emptyPoints = 8 - $workedPoints - $bookedPoints;
 
+$emptyPointsPercent = $emptyPoints / 8 * 100;
 $workedPointsPercent = $workedPoints / 8 * 100;
 $bookedPointsPercent = $bookedPoints / 8 * 100;
+
+if($emptyPointsPercent > 100 - $emptyPointsPercent)
+{
+	$emptyPointsPercent = 100 - $emptyPointsPercent;
+}
 if($workedPointsPercent > 100)
 {
 	$workedPointsPercent = 100;
@@ -50,6 +56,7 @@ if($bookedPointsPercent > 100 - $workedPointsPercent)
 {
 	$bookedPointsPercent = 100 - $workedPointsPercent;
 }
+
 //
 //Load upcoming events
 function loadUpcomingEvents()

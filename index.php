@@ -42,7 +42,9 @@ include_once('php/pageManager.php');
  					  <small>Din period: <strong><?php echo $periodStart.' - '.$periodEnd; ?></strong></small>
  					  </p>
 					  
-					  <div class="progress" rel='tooltip' title="Ej bokat: <?php echo $emptyPoints; ?>p" >
+					  <div class="progress" >
+					   <div class="progress-bar not" rel='tooltip' title="Ej bokade: <?php echo $emptyPoints; ?>p" style="width: <?php echo $emptyPointsPercent; ?>%">
+</div>
 					    <div class="progress-bar worked" rel='tooltip' title="Arbetade: <?php echo $workedPoints; ?>p" style="width: <?php echo $workedPointsPercent; ?>%">
 						<!--<p> 3p </p>
 					      <span class="sr-only">3 arbetade poÃ¤ng</span>-->
@@ -75,7 +77,7 @@ include_once('php/pageManager.php');
 		            <ul class="main-nav">
 		              <li class="active"><a href="?page=start"><span class="glyphicon glyphicon-home"></span>Hem</a></li>
 		              <li class="panel dropdown">
-					<a data-toggle="collapse" data-parent="#menu-bar" href="#collapseOne" ><span class="glyphicon glyphicon-user"></span>Min konto<span class="glyphicon glyphicon-chevron-down"></span></a>
+					<a data-toggle="collapse" data-parent="#menu-bar" href="#collapseOne" ><span class="glyphicon glyphicon-user"></span>Mitt Konto<i class="glyphicon glyphicon-chevron-down"></i></a>
 						  <ul id="collapseOne" class="panel-collapse collapse">
 						  <li><a href="?page=profile">Min profil</a></li>
 						  <li><a href="#">Meddelande</a></li>
@@ -84,7 +86,7 @@ include_once('php/pageManager.php');
 						  </ul>
 		              </li>
 		               <li class="panel dropdown">
-					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo" ><span class="glyphicon glyphicon-wrench"></span>Adminverktyg<span class="glyphicon glyphicon-chevron-down"></span></a>
+					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo" ><span class="glyphicon glyphicon-wrench"></span>Adminverktyg<i class="glyphicon glyphicon-chevron-down"></i></a>
 						  <ul id="collapseTwo" class="panel-collapse collapse">
 					  <li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
 					  <li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
@@ -148,26 +150,32 @@ include_once('php/pageManager.php');
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/ui-datepicker.js"></script>
 	<script src="js/ui_timepicker-addon.js"></script>
-	<script>
-		$(function() {
+
+		<!-- Datepicker -->
+		<script>
+			$(function() {
 			$( ".datepicker" ).datetimepicker();
-		});
-	</script>
+			});
+		</script>
 	
-					<script type="text/javascript">
-						(function($) {
-							var $window = $(window),
-								$html = $('#menu-bar');
+	<!-- Collapsing Bars -->
+		<script type="text/javascript">
+				(function($) {
+				var $window = $(window),
+				$html = $('#menu-bar');
+				$('[data-toggle=collapse]').click(function(){
+				$(this).find("i").toggleClass("glyphicon-chevron-down glyphicon-chevron-up");
+			});
+				$window.resize(function resize() {
+				if ($window.width() < 768) {
+			   return $html.removeClass('nav-stacked');
+			}
+				$html.addClass('nav-stacked');
+				}).trigger('resize');
+				})(jQuery);
+		</script>
 
-							$window.resize(function resize() {
-								if ($window.width() < 768) {
-								   return $html.removeClass('nav-stacked');
-								}
-								$html.addClass('nav-stacked');
-							}).trigger('resize');
-									})(jQuery);
-				</script>
-
+<!-- Tooltip -->
 		  <script>
   $(function() {
     $( document ).tooltip({
@@ -181,6 +189,7 @@ include_once('php/pageManager.php');
             .addClass( feedback.vertical )
             .addClass( feedback.horizontal )
             .appendTo( this );
+
         }
       }
     });
