@@ -252,19 +252,20 @@
 	border-left-width: 1px;
 }
 
-  .ui-tooltip, .arrow:after {
-    background: #fff;
-    border: 2px solid white;
-  }
-
   .ui-tooltip {
-	padding: 5px;
 	position: absolute;
 	z-index: 9999;
 	max-width: 200px;
+	border-radius: 4px !important;
+	background: #363430 !important;
+	color: #fff !important;
+	padding: 8px 10px !important;
+	border: 0 !important;
+	-webkit-box-shadow: 0px 3px 2px 0px rgba(50, 50, 50, 0.5);
+	-moz-box-shadow:    0px 3px 2px 0px rgba(50, 50, 50, 0.5);
+	box-shadow:         0px 3px 2px 0px rgba(50, 50, 50, 0.5);
 }
 body .ui-tooltip {
-	border-width: 0px;
 		font-size: 12px;
 		font-family: 'Roboto', sans-serif;
 }
@@ -297,6 +298,10 @@ body .ui-tooltip {
     -ms-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     tranform: rotate(45deg);
+	background: #363430;
+	-webkit-box-shadow: 0px 3px 2px 0px rgba(50, 50, 50, 0.5);
+	-moz-box-shadow:    0px 3px 2px 0px rgba(50, 50, 50, 0.5);
+	box-shadow:         0px 3px 2px 0px rgba(50, 50, 50, 0.5);
   }
   .arrow.top:after {
     bottom: -20px;

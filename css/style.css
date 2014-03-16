@@ -76,6 +76,7 @@ a {
 		color: #fff;
 	}
 	#sidebar .your-period .progress {
+		cursor: pointer;
 		height: 10px;
 		margin-bottom: 2px;
 		background: #d17204;

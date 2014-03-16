@@ -43,13 +43,13 @@ include_once('php/pageManager.php');
  					  </p>
 					  
 					  <div class="progress" >
-					   <div class="progress-bar not" rel='tooltip' title="Ej bokade: <?php echo $emptyPoints; ?>p" style="width: <?php echo $emptyPointsPercent; ?>%">
+					   <div class="progress-bar not" rel='tooltip' title="Ej bokat: <?php echo $emptyPoints; ?> poäng" style="width: <?php echo $emptyPointsPercent; ?>%">
 </div>
-					    <div class="progress-bar worked" rel='tooltip' title="Arbetade: <?php echo $workedPoints; ?>p" style="width: <?php echo $workedPointsPercent; ?>%">
+					    <div class="progress-bar worked" rel='tooltip' title="Arbetat: <?php echo $workedPoints; ?> poäng" style="width: <?php echo $workedPointsPercent; ?>%">
 						<!--<p> 3p </p>
 					      <span class="sr-only">3 arbetade poÃ¤ng</span>-->
 					    </div>
-					    <div class="progress-bar booked" rel='tooltip'  title="Bokade: <?php echo $bookedPoints; ?>p" style="width:<?php echo $bookedPointsPercent; ?>%">
+					    <div class="progress-bar booked" rel='tooltip'  title="Bokat: <?php echo $bookedPoints; ?> poäng" style="width:<?php echo $bookedPointsPercent; ?>%">
 						<!--<p> 3p </p>
 					      <span class="sr-only">3 bokade poÃ¤ng</span> -->
 					    </div>
