@@ -243,7 +243,7 @@ function loadTodaysEvents()
 			$end = $end->format(' H:i');
 			$type = $upcomingEvents[$i]['type_name'];
 			?>
-				<a href="#" class="list-group-item"><i class="glyphicon glyphicon-chevron-down" style="float:right"></i><span class="badge" style="margin-right: 5px"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><span class="title" style="font-size: 0.8em; margin: 0 5px 0 -10px"><?php echo $start. '' .$end;?></span><?php echo $name ?></a>
+				<a href="#" class="list-group-item"><strong class="list-group-item-time-floated-left"><?php echo $start. '' .$end;?></strong><?php echo $name ?></a>
 			<?php
 		}
 	}
