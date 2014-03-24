@@ -18,7 +18,7 @@
 <div class="col-sm-6">
 	<div class="media">
 	  <a class="pull-left" href="#">
-	    <img class="media-object avatar-96x96" src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-prn2/t31/1796073_721213827918428_191568827_o.jpg" width="96px" height="96px" alt="namn">
+	    <img class="media-object avatar-96x96" src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-prn2/t31/1796073_721213827918428_191568827_o.jpg" alt="namn">
 	  </a>
 	  <div class="media-body">
 	    <h3 class="media-heading"><a href="">Hampus Axelsson</a></h3>

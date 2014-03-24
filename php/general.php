@@ -44,10 +44,13 @@ $emptyPointsPercent = $emptyPoints / 8 * 100;
 $workedPointsPercent = $workedPoints / 8 * 100;
 $bookedPointsPercent = $bookedPoints / 8 * 100;
 
+/*
+	The progressbar showed wrong value, 25% instead of 75%. It seems to work after I 	commented this code. /Andreas
+
 if($emptyPointsPercent > 100 - $emptyPointsPercent)
 {
 	$emptyPointsPercent = 100 - $emptyPointsPercent;
-}
+}*/
 if($workedPointsPercent > 100)
 {
 	$workedPointsPercent = 100;
