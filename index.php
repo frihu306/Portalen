@@ -78,7 +78,7 @@ include_once('php/pageManager.php');
 		            <ul class="main-nav">
 		              <li class="active"><a href="?page=start"><span class="glyphicon glyphicon-home"></span>Hem</a></li>
 		              <li class="panel dropdown">
-					<a data-toggle="collapse" data-parent="#menu-bar" href="#collapseOne"><span class="glyphicon glyphicon-user"></span>Mitt Konto<span class="glyphicon glyphicon-chevron-down dropdown-arrow"></span></a>
+					<a data-toggle="collapse" data-parent="#menu-bar" href="#collapseOne"><span class="glyphicon glyphicon-user"></span>Mitt Konto<span class="chevron_toggleable glyphicon glyphicon-chevron-down"></span></a>
 						  <ul id="collapseOne" class="panel-collapse collapse">
 						  <li><a href="?page=profile">Min profil</a></li>
 						  <li><a href="#">Meddelande</a></li>
@@ -87,7 +87,7 @@ include_once('php/pageManager.php');
 						  </ul>
 		              </li>
 		               <li class="panel dropdown">
-					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo"><span class="glyphicon glyphicon-wrench"></span>Adminverktyg<span class="glyphicon glyphicon-chevron-down dropdown-arrow"></span></a>
+					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo"><span class="glyphicon glyphicon-wrench"></span>Adminverktyg<span class="chevron_toggleable glyphicon glyphicon-chevron-down"></span></a>
 						  <ul id="collapseTwo" class="panel-collapse collapse">
 					  <li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
 					  <li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
@@ -165,8 +165,8 @@ include_once('php/pageManager.php');
 				(function($) {
 				var $window = $(window),
 				$html = $('#menu-bar');
-				$('[data-toggle=collapse]').click(function(){
-				$(this).find("span").toggleClass("glyphicon-chevron-down glyphicon-chevron-up");
+			$('[data-toggle=collapse]').click(function(){
+    		$(this).find(".chevron_toggleable").toggleClass("glyphicon-chevron-down glyphicon-chevron-up");
 			});
 				$window.resize(function resize() {
 				if ($window.width() < 768) {

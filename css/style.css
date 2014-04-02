@@ -131,7 +131,7 @@ a {
 		margin-right: 20px;
 		padding-top: 2px;
 	}
-	#sidebar > div.main-menu-wrapper > div.navbar-collapse.collapse > ul > li > a > span.dropdown-arrow {
+	#sidebar > div.main-menu-wrapper > div.navbar-collapse.collapse > ul > li > a > span.chevron_toggleable.glyphicon {
 		float: right;
 		margin-right: 0;
 	}
