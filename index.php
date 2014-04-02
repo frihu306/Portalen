@@ -91,6 +91,7 @@ include_once('php/pageManager.php');
 						  <ul id="collapseTwo" class="panel-collapse collapse">
 					  <li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
 					  <li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
+					  <li><a href="?page=createNews"></span>Skapa en nyhet</a></li>
 						  </ul>
 		              </li>
 		              <li><a href="?page=book" onclick="location.reload()"><span class="glyphicon glyphicon-list-alt"></span>Boka pass</a></li>
@@ -165,7 +166,7 @@ include_once('php/pageManager.php');
 				var $window = $(window),
 				$html = $('#menu-bar');
 				$('[data-toggle=collapse]').click(function(){
-				$(this).find("i").toggleClass("glyphicon-chevron-down glyphicon-chevron-up");
+				$(this).find("span").toggleClass("glyphicon-chevron-down glyphicon-chevron-up");
 			});
 				$window.resize(function resize() {
 				if ($window.width() < 768) {

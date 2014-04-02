@@ -126,7 +126,7 @@ a {
 	#sidebar ul.main-nav li.active a {
 		color: #f8f8f8;
 	}
-	#sidebar ul.main-nav li a span.glyphicon {
+	#sidebar ul.main-nav li a span {
 		float: left;
 		margin-right: 20px;
 		padding-top: 2px;
