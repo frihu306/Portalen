@@ -92,8 +92,9 @@ include_once('php/pageManager.php');
 					  <li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
 					  <li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
 					  <li><a href="?page=createNews"></span>Skapa en nyhet</a></li>
+						  </li>  
 						  </ul>
-		              </li>
+		            
 		              <li><a href="?page=book" onclick="location.reload()"><span class="glyphicon glyphicon-list-alt"></span>Boka pass</a></li>
 		              <li><a href="?page=news"><span class="glyphicon glyphicon-bullhorn"></span>Nyheter</a></li>
 					  <li><a href="?page=forum"><span class="glyphicon glyphicon-comment"></span>Diskussionsforum</a></li>
