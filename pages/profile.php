@@ -8,7 +8,7 @@
 <div class="row">
 
 <div class="col-sm-5">
-	<p>Här ska det stå fett med mycket cool info om Herpa Derp. Återigen är detta typ ganska php beroende då det ska vara fett dynamiskt..!</p>
+	<p><?php echo $profileDescription; ?></p>
 </div>
 <div class="col-sm-7">
 </div>
