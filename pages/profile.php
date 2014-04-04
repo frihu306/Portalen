@@ -12,7 +12,7 @@
 	<p><?php echo $profileDescription; ?></p>
 </div>
 <div class="col-sm-7">
-Mobilnummer: <?php echo $profileNumber; ?> </br>
+<p>Mobilnummer: <?php echo $profileNumber; ?> </br>
 Personal på Trappan sedan: <?php echo $profileCreation; ?></br>
 E-mail Adress: <?php echo $profileMail; ?></p>
 </div>
