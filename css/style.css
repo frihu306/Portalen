@@ -284,6 +284,52 @@ a {
 	  border-bottom-right-radius: 0px;
 	  border-bottom-left-radius: 0px;
 	}
+
+
+input[type="submit"]{
+display: inline-block;
+padding: 6px 12px;
+
+font-size: 12px;
+color: #fff;
+font-weight: normal;
+line-height: 1.428571429;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+cursor: pointer;
+background: #6492de;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+border: 1px solid transparent;
+}
+
+input[type="button"]{
+display: inline-block;
+padding: 6px 12px;
+font-size: 12px;
+color: #fff;
+font-weight: normal;
+line-height: 1.428571429;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+cursor: pointer;
+background: #6492de;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+border: 1px solid transparent;
+}
+
+input[type="text"]{
+	
+}
 	
 	
 /* =Footer

@@ -166,7 +166,7 @@ include_once('php/pageManager.php');
 				(function($) {
 				var $window = $(window),
 				$html = $('#menu-bar');
-			$('[data-toggle=collapse]').click(function(){
+			$('[data-toggle=collpse]').click(function(){
     		$(this).find(".chevron_toggleable").toggleClass("glyphicon-chevron-down glyphicon-chevron-up");
 			});
 				$window.resize(function resize() {

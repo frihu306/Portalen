@@ -106,21 +106,20 @@ function removeSlot(id)
 
 <div class="col-sm-10">
 	<form action="" method="post">
-		<p><input type="text" placeholder="Namn" name="name"/></p>
-		<p><input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $dateNoTime; ?>"/></p>
-		<p><input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $dateNoTime; ?>"/></p>
-		<p>
+	<h4> Evenemangsmallar </h4>
 			<select name="template" onchange="getTemplate(this.value)">
 				<option value="no">Ingen mall</option>
 				<?php loadTemplates(); ?>
 			</select>
 		</p>
-		<p>
-			<select name="type">
+		<p>Evenemangets namn: <input type="text" placeholder="Namn" name="name"/></p>
+		<p>Evenemanget startar:<input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $dateNoTime; ?>"/></p>
+		<p>Evenemanget slutar: <input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $dateNoTime; ?>"/></p>
+		<p>Typ av Evenemang: 
+		<select name="type">
 				<option id="typeno" value="no">Välj typ</option>
 				<?php loadTypes(); ?>
-			</select>
-		</p>
+			</select></p>
 		<p>
 			<input type="button" value="Lägg till pass" onClick="addGroup()"/>
 			<input id="group_amount" type="number" value="1" style="width:40px;"/>
