@@ -135,11 +135,8 @@ include_once('php/pageManager.php');
 			 
 		  <div class="row">
 			  <div id="footer">
-			  <div class="col-sm-10">
+			  <div class="col-sm-12">
 				  <p>Trappans Personalportal 2014. <a href="?page=about">Om portalen</a>. <br />Kontakta Trappans <a href="#">webbansvarig</a> vid problem eller frågor. Portalen använder sig av <a href="http://glyphicons.com/" target="_blank">Glyphicons</a>.
-			  </div>
-			  <div class="col-sm-2 text-right">
-				  <a href="#top" class="scroll-to-top"><span class="glyphicon glyphicon-chevron-up"></span></a>
 			  </div>
 		 	  </div> <!-- #footer -->
 		  </div>
