@@ -1,6 +1,11 @@
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1>Lagsidor</h1>
+			<h1>Lagsidor</h1><select class="selectpicker">
+    <option>Webb</option>
+    <option>DG</option>
+    <option>Bastu</option>
+  </select>
+			
 		</div>
 	</div>
 </div> <!-- .row -->
